@@ -1,0 +1,13 @@
+openai
+python-dotenv
+mistralai
+python-decouple
+matplotlib
+numpy
+anthropic
+streamlit
+pillow
+joblib
+sqlalchemy
+alembic
+psycopg2-binary

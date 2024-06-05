@@ -1,0 +1,126 @@
+[
+  {
+    "name": "alien life",
+    "description": "There is intelligent life outside of Earth",
+    "mode": "claims"
+  },
+  {
+    "name": "consciousness",
+    "description": "Human consciousness can exist independently of the brain",
+    "mode": "claims"
+  },
+  {
+    "name": "plant communication",
+    "description": "Plants can communicate and interact in complex ways",
+    "mode": "claims"
+  },
+  {
+    "name": "quantum consciousness",
+    "description": "Consciousness may be linked to quantum processes",
+    "mode": "claims"
+  },
+  {
+    "name": "climate manipulation",
+    "description": "It is possible to manipulate climate in controlled ways",
+    "mode": "claims"
+  },
+  {
+    "name": "brain-computer interface",
+    "description": "Direct communication between human brains and computers is feasible",
+    "mode": "claims"
+  },
+  {
+    "name": "unknown particles",
+    "description": "There are fundamental particles in the universe we have not yet discovered",
+    "mode": "claims"
+  },
+  {
+    "name": "human longevity",
+    "description": "Humans can potentially live significantly longer lives through scientific advancements",
+    "mode": "claims"
+  },
+  {
+    "name": "multiverse theory",
+    "description": "Multiple parallel universes exist simultaneously",
+    "mode": "claims"
+  },
+  {
+    "name": "abiogenesis",
+    "description": "Life can arise naturally from non-living matter under certain conditions",
+    "mode": "claims"
+  },
+  {
+    "name": "fast radio bursts",
+    "description": "Fast radio bursts have an unknown origin and may indicate advanced technology",
+    "mode": "claims"
+  },
+  {
+    "name": "Mars life",
+    "description": "There is microbial life on Mars",
+    "mode": "claims"
+  },
+  {
+    "name": "Oumuamua",
+    "description": "The interstellar object Oumuamua was a probe from an advanced civilization",
+    "mode": "claims"
+  },
+  {
+    "name": "cold fusion",
+    "description": "Cold fusion is a viable source of energy",
+    "mode": "claims"
+  },
+  {
+    "name": "holographic universe",
+    "description": "The universe is a hologram and our reality is a projection",
+    "mode": "claims"
+  },
+  {
+    "name": "conscious AI",
+    "description": "Artificial intelligence can achieve consciousness",
+    "mode": "claims"
+  },
+  {
+    "name": "panspermia",
+    "description": "Life on Earth was seeded by biological material from space",
+    "mode": "claims"
+  },
+  {
+    "name": "tachyons",
+    "description": "Tachyons, particles that travel faster than light, exist",
+    "mode": "claims"
+  },
+  {
+    "name": "superluminal communication",
+    "description": "Information can be transmitted faster than the speed of light",
+    "mode": "claims"
+  },
+  {
+    "name": "non-coding DNA",
+    "description": "Non-coding DNA has unknown functions crucial for life",
+    "mode": "claims"
+  },
+  {
+    "name": "rogue planets",
+    "description": "Rogue planets without a star can support life",
+    "mode": "claims"
+  },
+  {
+    "name": "quantum entanglement in biology",
+    "description": "Quantum entanglement plays a role in biological processes",
+    "mode": "claims"
+  },
+  {
+    "name": "human echolocation",
+    "description": "Humans can develop the ability to navigate using echolocation",
+    "mode": "claims"
+  },
+  {
+    "name": "magnetic pole reversal",
+    "description": "The Earth's magnetic poles are on the verge of reversing",
+    "mode": "claims"
+  },
+  {
+    "name": "extreme animal adaptation",
+    "description": "Some animals can rapidly evolve to adapt to extreme environments"
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Africa",
+    "description": "The UN system plays a crucial role in coordinating assistance of all kinds — to help Africa help itself. From promoting the development of democratic institutions, to the establishment of peace between warring nations, the UN is present on the ground supporting economic and social development and the promotion and protection of human rights."
+  },
+  {
+    "name": "Ageing",
+    "description": "The world’s population is ageing: virtually every country in the world is experiencing growth in the number and proportion of older persons in their population. The number of older persons, those aged 60 years or over, has increased substantially in recent years in most countries and regions, and that growth is projected to accelerate in the coming decades."
+  },
+  {
+    "name": "AIDS",
+    "description": "HIV infections have been reduced by 59% since the peak in 1995, (by 58% among children since 2010) and AIDS-related deaths have fallen by 69% since the peak in 2004 and by 51% since 2010. Globally 46% of all new HIV infections were among women and girls in 2022. The UN family has been in the vanguard of this progress."
+  },
+  {
+    "name": "Atomic Energy",
+    "description": "More than 30 countries worldwide are operating 413 nuclear reactors for electricity generation and 58 new nuclear plants are under construction. By the end of 2022, 12 countries relied on nuclear energy to supply at least one-quarter of their total electricity."
+  },
+  {
+    "name": "Big Data for Sustainable Development",
+    "description": "The volume of data in the world is increasing exponentially. New sources of data, new technologies, and new analytical approaches, if applied responsibly, can allow to better monitor progress toward achievement of the SDGs in a way that is both inclusive and fair."
+  },
+  {
+    "name": "Child and Youth Safety Online",
+    "description": "Rising Internet connectivity has the potential to transform children and young people’s lives for the better, but also makes them vulnerable to sexual abuse, cyberbullying, and other risks. The UN is actively working to protect children and youth online through various programmes and initiatives."
+  },
+  {
+    "name": "Children",
+    "description": "Every child has the right to health, education and protection, and every society has a stake in expanding children’s opportunities in life. Yet, around the world, millions of children are denied a fair chance for no reason other than the country, gender or circumstances into which they are born."
+  },
+  {
+    "name": "Climate Change",
+    "description": "Climate change is one of the major challenges of our time. From shifting weather patterns that threaten food production, to rising sea levels that increase the risk of catastrophic flooding, the impacts of climate change are global in scope and unprecedented in scale."
+  },
+  {
+    "name": "Decolonization",
+    "description": "The wave of decolonization, which changed the face of the planet, was born with the UN and represents the world body’s first great success. As a result of decolonization many countries became independent and joined the UN."
+  },
+  {
+    "name": "Democracy",
+    "description": "Democracy is a universally recognized ideal and is one of the core values and principles of the United Nations. Democracy provides an environment for the protection and effective realization of human rights."
+  },
+  {
+    "name": "Disarmament",
+    "description": "Since the birth of the United Nations, the goals of multilateral disarmament and arms limitation have been central to the Organization’s efforts to maintain international peace and security."
+  },
+  {
+    "name": "Ending Poverty",
+    "description": "At current rates of progress, the world is unlikely to meet the global goal of ending extreme poverty by 2030, with estimates suggesting that nearly 600 million people will still be living in extreme poverty."
+  },
+  {
+    "name": "Food",
+    "description": "The world is not on track to achieve Sustainable Development Goal 2, Zero Hunger by 2030. The food security and nutritional status of the most vulnerable population groups is likely to deteriorate further due to the health and socio-economic impacts of the COVID-19 pandemic."
+  },
+  {
+    "name": "Gender Equality",
+    "description": "Women and girls represent half of the world’s population and, therefore, also half of its potential. Gender equality, besides being a fundamental human right, is essential to achieve peaceful societies, with full human potential and sustainable development."
+  },
+  {
+    "name": "Health",
+    "description": "The United Nations, since its inception, has been actively involved in promoting and protecting good health worldwide. Leading that effort within the UN system is the World Health Organization (WHO), whose constitution came into force on 7 April 1948."
+  },
+  {
+    "name": "Human Rights",
+    "description": "Promoting respect for human rights is a core purpose of the United Nations and defines its identity as an organization for people around the world. Member States have mandated the Secretary-General and the UN System to help them achieve the standards set out in the UN Charter and the Universal Declaration of Human Rights."
+  },
+  {
+    "name": "International Law and Justice",
+    "description": "The UN continues to promote justice and international law across its three pillars of work: international peace and security, economic and social progress and development, and respect for human rights and fundamental freedoms."
+  },
+  {
+    "name": "International migration",
+    "description": "Since the earliest times, humanity has been on the move. Today, more people than ever before live in a country other than the one in which they were born."
+  },
+  {
+    "name": "Oceans and the Law of the Sea",
+    "description": "Life itself arose from the oceans. The ocean is vast, some 72 per cent of the earth's surface. Not only has the oceans always been a prime source of nourishment for the life it helped generate, but from earliest recorded history it has served for trade and commerce, adventure and discovery."
+  },
+  {
+    "name": "Peace and Security",
+    "description": "Saving succeeding generations from the scourge of war was the main motivation for creating the United Nations, whose founders lived through the devastation of two world wars."
+  },
+  {
+    "name": "Population",
+    "description": "In 1950, five years after the founding of the United Nations, world population was estimated at around 2.6 billion people. It reached 5 billion in 1987 and 6 in 1999. In October 2011, the global population was estimated to be 7 billion."
+  },
+  {
+    "name": "Refugees",
+    "description": "There were 110 million people forcibly displaced world-wide at the end of June 2023. Among those were 36.4 million refugees, (30.5 million refugees under UNHCR's mandate, and 5.94 million Palestine refugees under UNRWA's mandate)."
+  },
+  {
+    "name": "Water",
+    "description": "Fresh water sustains human life and is vital for human health. There is enough fresh water for everyone on Earth. However, due to bad economics or poor infrastructure, millions of people (most of them children) die from diseases associated with inadequate water supply, sanitation and hygiene."
+  },
+  {
+    "name": "Youth",
+    "description": "As youth are increasingly demanding more just, equitable and progressive opportunities and solutions in their societies, the need to address the multifaceted challenges faced by young people (such as access to education, health, employment and gender equality) have become more pressing than ever."
+  }
+]
