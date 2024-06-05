@@ -1,6 +1,7 @@
 from io import BytesIO
 
 import matplotlib.pyplot as plt
+import matplotlib.cm
 import numpy as np
 from PIL import Image
 from joblib import Memory
@@ -32,7 +33,7 @@ def get_plot(question_stats, fname="", dpi=300, figsize=(10, 5)):
 
     # Creating bar plot
     bars = ax.bar(languages, means, yerr=stds, capsize=5,
-                  color=plt.cm.get_cmap('tab20').colors[:len(languages)])
+                  color=matplotlib.cm.get_cmap('tab20').colors[:len(languages)])
 
     ax.set_ylim([0, 9.5])
     plt.setp(ax.xaxis.get_majorticklabels(), rotation=45, ha="right")
