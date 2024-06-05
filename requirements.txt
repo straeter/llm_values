@@ -2,7 +2,7 @@ openai
 python-dotenv
 mistralai
 python-decouple
-matplotlib
+matplotlib==3.7.3
 numpy
 anthropic
 streamlit
