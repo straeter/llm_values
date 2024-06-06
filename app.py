@@ -94,7 +94,7 @@ def main():
 
         translation = st.selectbox("Choose language", languages, index=1, key="translation")
 
-    params = st.session_state.setup_selected
+    params = st.session_state.setups[setup]
 
     if st.session_state.question_selected != question or \
             setup != st.session_state.setup_selected:

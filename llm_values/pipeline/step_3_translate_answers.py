@@ -42,6 +42,8 @@ async def translate_answers(topic: str, testing=False, overwrite=False):
     # Load answers
     with Session(engine) as session:
         topic_object = session.query(Topic).filter(Topic.name == topic).first()
+        if not topic_object:
+            topic_object = session.query(Topic).filter(Topic.filename == topic).first()
         answers = topic_object.answers
 
         if not overwrite:
