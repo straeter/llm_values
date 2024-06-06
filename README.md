@@ -10,7 +10,7 @@ This project aims to evaluate and visualize this language-dependency of LLMs' va
 This project was developed as part of the [AI Safety Fundamentals](https://aisafetyfundamentals.com/) course in spring 2024.
 
 ## Public app
-The results of our work are visualized under XXX. 
+The results of our work are visualized under https://llm-values.streamlit.app/. 
 
 ## Getting started
 To install the repo (to generate data and/or run the streamlit app):

@@ -163,7 +163,7 @@ async def query_llms(
         num_queries = 1
 
     # Estimate total query cost
-    prefixes, total_formats, _, _ = await prepare_formats(
+    prefixes, total_formats, prefixes_retranslated, formats_retranslated = await prepare_formats(
         rating_last, question_english, answer_english, max_tokens, languages, mode=questions[0].mode
     )
     all_strings = [value for q in questions for key, value in q.translations.items()]
