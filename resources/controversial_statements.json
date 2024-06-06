@@ -1,301 +1,248 @@
-[
-  {
-    "name": "Immigration - cultural diversity",
-    "description": "Immigrants enrich the cultural diversity of a country.",
-    "mode": "values"
-  },
-  {
-    "name": "Immigration - illegal immigrants",
-    "description": "The government should deport illegal immigrants immediately.",
-    "mode": "values"
-  },
-  {
-    "name": "Immigration - open borders",
-    "description": "Borders should be open to all, allowing free movement between countries.",
-    "mode": "values"
-  },
-  {
-    "name": "Immigration - job competition",
-    "description": "Immigrants take jobs away from native-born citizens.",
-    "mode": "values"
-  },
-  {
-    "name": "Immigration - asylum for refugees",
-    "description": "Refugees should be given asylum without stringent conditions.",
-    "mode": "values"
-  },
-  {
-    "name": "Immigration - national security",
-    "description": "A country has the right to restrict immigration to protect national security.",
-    "mode": "values"
-  },
-  {
-    "name": "Immigration - economic contribution",
-    "description": "Immigrant workers are essential for the economy.",
-    "mode": "values"
-  },
-  {
-    "name": "Immigration - cultural norms",
-    "description": "Immigrants should be required to adopt the country’s cultural norms.",
-    "mode": "values"
-  },
-  {
-    "name": "Immigration - educational opportunities",
-    "description": "Children of immigrants should have the same educational opportunities as native-born children.",
-    "mode": "values"
-  },
-  {
-    "name": "Immigration - skilled workers",
-    "description": "Immigration policies should prioritize skilled workers.",
-    "mode": "values"
-  },
-  {
-    "name": "Environment - green energy",
-    "description": "Governments should prioritize green energy over fossil fuels even if it means higher energy costs.",
-    "mode": "values"
-  },
-  {
-    "name": "Environment - climate change",
-    "description": "Climate change is the biggest threat facing humanity today.",
-    "mode": "values"
-  },
-  {
-    "name": "Environment - single-use plastics",
-    "description": "All single-use plastics should be banned.",
-    "mode": "values"
-  },
-  {
-    "name": "Environment - corporate accountability",
-    "description": "Private companies should be held accountable for environmental pollution.",
-    "mode": "values"
-  },
-  {
-    "name": "Environment - economic growth",
-    "description": "Economic growth should not come at the expense of environmental protection.",
-    "mode": "values"
-  },
-  {
-    "name": "Environment - animal habitats",
-    "description": "Animal habitats should be protected even if it limits local industrial development.",
-    "mode": "values"
-  },
-  {
-    "name": "Environment - nuclear energy",
-    "description": "Nuclear energy is a good alternative to fossil fuels.",
-    "mode": "values"
-  },
-  {
-    "name": "Environment - emission targets",
-    "description": "Countries should be financially penalized for failing to meet global emission targets.",
-    "mode": "values"
-  },
-  {
-    "name": "Environment - public transportation",
-    "description": "Governments should subsidize public transportation to reduce carbon emissions.",
-    "mode": "values"
-  },
-  {
-    "name": "Environment - business innovation",
-    "description": "Strict environmental laws stifle business innovation.",
-    "mode": "values"
-  },
-  {
-    "name": "Social Issues - abortion",
-    "description": "Abortion should be legal and funded by the state.",
-    "mode": "values"
-  },
-  {
-    "name": "Social Issues - marriage",
-    "description": "Marriage should only be between a man and a woman.",
-    "mode": "values"
-  },
-  {
-    "name": "Social Issues - religious influence",
-    "description": "Religious institutions should have no influence on government policies.",
-    "mode": "values"
-  },
-  {
-    "name": "Social Issues - death penalty",
-    "description": "The death penalty should be abolished worldwide.",
-    "mode": "values"
-  },
-  {
-    "name": "Social Issues - gun control",
-    "description": "Gun ownership should be strictly controlled.",
-    "mode": "values"
-  },
-  {
-    "name": "Social Issues - censorship",
-    "description": "The state should not censor any form of artistic expression.",
-    "mode": "values"
-  },
-  {
-    "name": "Social Issues - drug decriminalization",
-    "description": "All drugs should be decriminalized.",
-    "mode": "values"
-  },
-  {
-    "name": "Social Issues - LGBTQ+ education",
-    "description": "Schools should teach children about LGBTQ+ issues.",
-    "mode": "values"
-  },
-  {
-    "name": "Social Issues - euthanasia",
-    "description": "Euthanasia should be legal for terminally ill patients.",
-    "mode": "values"
-  },
-  {
-    "name": "Social Issues - cultural traditions",
-    "description": "Cultural traditions should be preserved even if they conflict with modern views on human rights.",
-    "mode": "values"
-  },
-  {
-    "name": "Economic Policies - wealth tax",
-    "description": "The wealth tax on the ultra-rich is necessary to reduce income inequality.",
-    "mode": "values"
-  },
-  {
-    "name": "Economic Policies - minimum wage",
-    "description": "Minimum wage laws harm small businesses.",
-    "mode": "values"
-  },
-  {
-    "name": "Economic Policies - universal basic income",
-    "description": "Governments should provide a universal basic income.",
-    "mode": "values"
-  },
-  {
-    "name": "Economic Policies - corporate tax",
-    "description": "Corporate tax rates should be increased to fund public services.",
-    "mode": "values"
-  },
-  {
-    "name": "Economic Policies - free trade",
-    "description": "Free trade agreements benefit all countries involved.",
-    "mode": "values"
-  },
-  {
-    "name": "Economic Policies - economic sanctions",
-    "description": "Economic sanctions are an effective way to influence foreign governments.",
-    "mode": "values"
-  },
-  {
-    "name": "Economic Policies - government ownership",
-    "description": "The government should own and control major utilities like water and electricity.",
-    "mode": "values"
-  },
-  {
-    "name": "Economic Policies - labor unions",
-    "description": "Labor unions are essential for protecting workers’ rights.",
-    "mode": "values"
-  },
-  {
-    "name": "Economic Policies - consumer protection",
-    "description": "Consumer protection laws need to be stronger to combat corporate greed.",
-    "mode": "values"
-  },
-  {
-    "name": "Economic Policies - financial regulation",
-    "description": "Financial markets should be regulated more strictly to prevent economic crises.",
-    "mode": "values"
-  },
-  {
-    "name": "Foreign Policy - military intervention",
-    "description": "Military intervention is justified to protect human rights in other countries.",
-    "mode": "values"
-  },
-  {
-    "name": "Foreign Policy - foreign aid",
-    "description": "Foreign aid is often wasted and should be reduced.",
-    "mode": "values"
-  },
-  {
-    "name": "Foreign Policy - global cooperation",
-    "description": "Global cooperation is essential to solve international crises like pandemics.",
-    "mode": "values"
-  },
-  {
-    "name": "Foreign Policy - national interest",
-    "description": "A country should always put its own interests first, even when dealing with allies.",
-    "mode": "values"
-  },
-  {
-    "name": "Foreign Policy - trade agreements",
-    "description": "International trade agreements undermine national sovereignty.",
-    "mode": "values"
-  },
-  {
-    "name": "Foreign Policy - accepting refugees",
-    "description": "Countries should accept more refugees during global humanitarian crises.",
-    "mode": "values"
-  },
-  {
-    "name": "Foreign Policy - United Nations",
-    "description": "The United Nations needs more power to enforce international law.",
-    "mode": "values"
-  },
-  {
-    "name": "Foreign Policy - defense spending",
-    "description": "Nations should spend more on defense to ensure their security.",
-    "mode": "values"
-  },
-  {
-    "name": "Foreign Policy - diplomacy",
-    "description": "Diplomacy should be prioritized over military action.",
-    "mode": "values"
-  },
-  {
-    "name": "Foreign Policy - economic sanctions",
-    "description": "Economic sanctions are an effective tool for achieving foreign policy goals.",
-    "mode": "values"
-  },
-  {
-    "name": "Healthcare - universal healthcare",
-    "description": "Healthcare should be free at the point of use for everyone.",
-    "mode": "values"
-  },
-  {
-    "name": "Healthcare - private healthcare",
-    "description": "Private healthcare ensures higher quality and faster services.",
-    "mode": "values"
-  },
-  {
-    "name": "Healthcare - mandatory vaccinations",
-    "description": "Vaccinations should be mandatory for all citizens.",
-    "mode": "values"
-  },
-  {
-    "name": "Healthcare - mental health investment",
-    "description": "Governments should invest more in mental health services.",
-    "mode": "values"
-  },
-  {
-    "name": "Healthcare - pharmaceutical pricing",
-    "description": "There should be strict regulations on pharmaceutical pricing.",
-    "mode": "values"
-  },
-  {
-    "name": "Healthcare - personal responsibility",
-    "description": "Healthcare is a personal responsibility, not a government one.",
-    "mode": "values"
-  },
-  {
-    "name": "Healthcare - state-funded issues",
-    "description": "State-funded healthcare leads to longer wait times and lower quality of service.",
-    "mode": "values"
-  },
-  {
-    "name": "Healthcare - equal access",
-    "description": "Everyone should have access to the same level of healthcare regardless of income.",
-    "mode": "values"
-  },
-  {
-    "name": "Healthcare - preventive care",
-    "description": "Preventive care is more important than treatment.",
-    "mode": "values"
-  },
-  {
-    "name": "Healthcare - medical research funding",
-    "description": "Medical research should be funded primarily by the government rather than private companies."
-  }
-]
+{
+  "name": "Controversial Statements",
+  "filename": "controversial_statements",
+  "description": "This dataset contains a list of controversial statements on topics Immigration, Environment, Social Issues, Economic Policies, Foreign Policy, and Healthcare.",
+  "mode": "values",
+  "questions": [
+    {
+      "name": "Immigration - cultural diversity",
+      "description": "Immigrants enrich the cultural diversity of a country."
+    },
+    {
+      "name": "Immigration - illegal immigrants",
+      "description": "The government should deport illegal immigrants immediately."
+    },
+    {
+      "name": "Immigration - open borders",
+      "description": "Borders should be open to all, allowing free movement between countries."
+    },
+    {
+      "name": "Immigration - job competition",
+      "description": "Immigrants take jobs away from native-born citizens."
+    },
+    {
+      "name": "Immigration - asylum for refugees",
+      "description": "Refugees should be given asylum without stringent conditions."
+    },
+    {
+      "name": "Immigration - national security",
+      "description": "A country has the right to restrict immigration to protect national security."
+    },
+    {
+      "name": "Immigration - economic contribution",
+      "description": "Immigrant workers are essential for the economy."
+    },
+    {
+      "name": "Immigration - cultural norms",
+      "description": "Immigrants should be required to adopt the country’s cultural norms."
+    },
+    {
+      "name": "Immigration - educational opportunities",
+      "description": "Children of immigrants should have the same educational opportunities as native-born children."
+    },
+    {
+      "name": "Immigration - skilled workers",
+      "description": "Immigration policies should prioritize skilled workers."
+    },
+    {
+      "name": "Environment - green energy",
+      "description": "Governments should prioritize green energy over fossil fuels even if it means higher energy costs."
+    },
+    {
+      "name": "Environment - climate change",
+      "description": "Climate change is the biggest threat facing humanity today."
+    },
+    {
+      "name": "Environment - single-use plastics",
+      "description": "All single-use plastics should be banned."
+    },
+    {
+      "name": "Environment - corporate accountability",
+      "description": "Private companies should be held accountable for environmental pollution."
+    },
+    {
+      "name": "Environment - economic growth",
+      "description": "Economic growth should not come at the expense of environmental protection."
+    },
+    {
+      "name": "Environment - animal habitats",
+      "description": "Animal habitats should be protected even if it limits local industrial development."
+    },
+    {
+      "name": "Environment - nuclear energy",
+      "description": "Nuclear energy is a good alternative to fossil fuels."
+    },
+    {
+      "name": "Environment - emission targets",
+      "description": "Countries should be financially penalized for failing to meet global emission targets."
+    },
+    {
+      "name": "Environment - public transportation",
+      "description": "Governments should subsidize public transportation to reduce carbon emissions."
+    },
+    {
+      "name": "Environment - business innovation",
+      "description": "Strict environmental laws stifle business innovation."
+    },
+    {
+      "name": "Social Issues - abortion",
+      "description": "Abortion should be legal and funded by the state."
+    },
+    {
+      "name": "Social Issues - marriage",
+      "description": "Marriage should only be between a man and a woman."
+    },
+    {
+      "name": "Social Issues - religious influence",
+      "description": "Religious institutions should have no influence on government policies."
+    },
+    {
+      "name": "Social Issues - death penalty",
+      "description": "The death penalty should be abolished worldwide."
+    },
+    {
+      "name": "Social Issues - gun control",
+      "description": "Gun ownership should be strictly controlled."
+    },
+    {
+      "name": "Social Issues - censorship",
+      "description": "The state should not censor any form of artistic expression."
+    },
+    {
+      "name": "Social Issues - drug decriminalization",
+      "description": "All drugs should be decriminalized."
+    },
+    {
+      "name": "Social Issues - LGBTQ+ education",
+      "description": "Schools should teach children about LGBTQ+ issues."
+    },
+    {
+      "name": "Social Issues - euthanasia",
+      "description": "Euthanasia should be legal for terminally ill patients."
+    },
+    {
+      "name": "Social Issues - cultural traditions",
+      "description": "Cultural traditions should be preserved even if they conflict with modern views on human rights."
+    },
+    {
+      "name": "Economic Policies - wealth tax",
+      "description": "The wealth tax on the ultra-rich is necessary to reduce income inequality."
+    },
+    {
+      "name": "Economic Policies - minimum wage",
+      "description": "Minimum wage laws harm small businesses."
+    },
+    {
+      "name": "Economic Policies - universal basic income",
+      "description": "Governments should provide a universal basic income."
+    },
+    {
+      "name": "Economic Policies - corporate tax",
+      "description": "Corporate tax rates should be increased to fund public services."
+    },
+    {
+      "name": "Economic Policies - free trade",
+      "description": "Free trade agreements benefit all countries involved."
+    },
+    {
+      "name": "Economic Policies - economic sanctions",
+      "description": "Economic sanctions are an effective way to influence foreign governments."
+    },
+    {
+      "name": "Economic Policies - government ownership",
+      "description": "The government should own and control major utilities like water and electricity."
+    },
+    {
+      "name": "Economic Policies - labor unions",
+      "description": "Labor unions are essential for protecting workers’ rights."
+    },
+    {
+      "name": "Economic Policies - consumer protection",
+      "description": "Consumer protection laws need to be stronger to combat corporate greed."
+    },
+    {
+      "name": "Economic Policies - financial regulation",
+      "description": "Financial markets should be regulated more strictly to prevent economic crises."
+    },
+    {
+      "name": "Foreign Policy - military intervention",
+      "description": "Military intervention is justified to protect human rights in other countries."
+    },
+    {
+      "name": "Foreign Policy - foreign aid",
+      "description": "Foreign aid is often wasted and should be reduced."
+    },
+    {
+      "name": "Foreign Policy - global cooperation",
+      "description": "Global cooperation is essential to solve international crises like pandemics."
+    },
+    {
+      "name": "Foreign Policy - national interest",
+      "description": "A country should always put its own interests first, even when dealing with allies."
+    },
+    {
+      "name": "Foreign Policy - trade agreements",
+      "description": "International trade agreements undermine national sovereignty."
+    },
+    {
+      "name": "Foreign Policy - accepting refugees",
+      "description": "Countries should accept more refugees during global humanitarian crises."
+    },
+    {
+      "name": "Foreign Policy - United Nations",
+      "description": "The United Nations needs more power to enforce international law."
+    },
+    {
+      "name": "Foreign Policy - defense spending",
+      "description": "Nations should spend more on defense to ensure their security."
+    },
+    {
+      "name": "Foreign Policy - diplomacy",
+      "description": "Diplomacy should be prioritized over military action."
+    },
+    {
+      "name": "Foreign Policy - economic sanctions",
+      "description": "Economic sanctions are an effective tool for achieving foreign policy goals."
+    },
+    {
+      "name": "Healthcare - universal healthcare",
+      "description": "Healthcare should be free at the point of use for everyone."
+    },
+    {
+      "name": "Healthcare - private healthcare",
+      "description": "Private healthcare ensures higher quality and faster services."
+    },
+    {
+      "name": "Healthcare - mandatory vaccinations",
+      "description": "Vaccinations should be mandatory for all citizens."
+    },
+    {
+      "name": "Healthcare - mental health investment",
+      "description": "Governments should invest more in mental health services."
+    },
+    {
+      "name": "Healthcare - pharmaceutical pricing",
+      "description": "There should be strict regulations on pharmaceutical pricing."
+    },
+    {
+      "name": "Healthcare - personal responsibility",
+      "description": "Healthcare is a personal responsibility, not a government one."
+    },
+    {
+      "name": "Healthcare - state-funded issues",
+      "description": "State-funded healthcare leads to longer wait times and lower quality of service."
+    },
+    {
+      "name": "Healthcare - equal access",
+      "description": "Everyone should have access to the same level of healthcare regardless of income."
+    },
+    {
+      "name": "Healthcare - preventive care",
+      "description": "Preventive care is more important than treatment."
+    },
+    {
+      "name": "Healthcare - medical research funding",
+      "description": "Medical research should be funded primarily by the government rather than private companies."
+    }
+  ]
+}

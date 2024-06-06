@@ -19,6 +19,8 @@ async def add_questions(items: list[dict[str, str]], topic: str, description: st
     with Session(engine) as session:
 
         topic_object = session.query(Topic).filter(Topic.name == topic).first()
+        if not topic_object:
+            topic_object = session.query(Topic).filter(Topic.filename == topic).first()
 
         if not topic_object:
             topic_object = Topic(name=topic, description=description)
@@ -51,16 +53,20 @@ async def prepare_prompts(topic: str, description: str, mode: str):
     :param mode: Mode, one of priorities/values/claims
     """
 
-    items = load_json_file(f"{topic}.json", "resources")
+    topic_json = load_json_file(f"{topic}.json", "resources")
+    topic_name = topic_json.get("name", topic)
+    topic_description = topic_json.get("description", description)
+    topic_mode = topic_json.get("mode", mode)
+    topic_items = topic_json.get("questions")
 
-    await add_questions(items, topic, description, mode)
+    await add_questions(topic_items, topic_name, topic_description, topic_mode)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Preprocess priorities into questions.")
-    parser.add_argument("--topic", default="un_global_issues", help="Name of the topic")
+    parser.add_argument("--topic", default="", help="Name of the topic")
     parser.add_argument("--description", default="", help="Description of the topic")
-    parser.add_argument("--mode", default="priorities", help="Mode of the topic, one of priorities/values/claims")
+    parser.add_argument("--mode", default="", help="Mode of the topic, one of priorities/values/claims")
     args = parser.parse_args()
 
     asyncio.run(prepare_prompts(topic=args.topic, description=args.description, mode=args.mode))

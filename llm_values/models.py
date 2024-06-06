@@ -23,6 +23,7 @@ class Topic(Base):
     __tablename__ = "topic"
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String)
+    filename: Mapped[str] = mapped_column(String, nullable=True)
     description: Mapped[Optional[str]] = mapped_column(String)
 
     questions: Mapped[List["Question"]] = relationship(back_populates="topic", cascade="all, delete-orphan")

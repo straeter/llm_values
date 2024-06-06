@@ -1,102 +1,108 @@
-[
-  {
-    "name": "Risks from artificial intelligence",
-    "description": "The development of AI is likely to greatly influence the course we take as a society. We think that if it goes badly, however, it could pose an existential threat."
-  },
-  {
-    "name": "Catastrophic pandemics",
-    "description": "Biotechnological developments threaten to make much deadlier pandemics possible, due to accidental leaks or malicious use of engineered pathogens."
-  },
-  {
-    "name": "Nuclear war",
-    "description": "Nuclear weapons were the first genuine man-made existential threat. Despite some progress, we have not reduced the threat of nuclear war enough."
-  },
-  {
-    "name": "Great power war",
-    "description": "There’s a significant chance that a new great power war occurs this century — and this seems like a major risk factor for existential catastrophe. However, it seems hard to reduce this risk."
-  },
-  {
-    "name": "Climate change",
-    "description": "Beyond the suffering it’s already causing, worse climate change could increase existential risks from other causes and affect standards of living far into the future."
-  },
-  {
-    "name": "Civilisation resilience",
-    "description": "If we make it more likely that the world’s population could eventually recover from a catastrophic collapse, we could save the possibility of a flourishing future even if a catastrophe does occur."
-  },
-  {
-    "name": "'S-risks'",
-    "description": "Worse than extinction would be a long future of great suffering. The study of these suffering risks (‘s-risks’) aims to specifically minimise the chance of a terrible outcome."
-  },
-  {
-    "name": "Artificial sentience",
-    "description": "We may soon create machines capable of experiencing happiness and suffering, whose wellbeing will matter just like our own. But our understanding of consciousness is so incomplete, we might not even realise when this becomes possible."
-  },
-  {
-    "name": "Promoting positive values",
-    "description": "If we could effectively spread positive values — like (we think!) caring about the wellbeing of all sentient beings impartially — that could be one of the broadest ways to help with a range of problems."
-  },
-  {
-    "name": "Risks of stable totalitarianism",
-    "description": "If a totalitarian regime ever becomes technologically advanced enough and gains enough global control, might it persist more or less indefinitely?"
-  },
-  {
-    "name": "Space governance",
-    "description": "Even as investment in space increases, we have very little plan for how nations, companies, and individuals will interact fairly and peacefully there."
-  },
-  {
-    "name": "Improving incentives and governance for global public goods",
-    "description": "There are many ‘public goods’ problems, where no one is incentivised to do what would be best for everyone. Can we design mechanisms and institutions to mitigate this issue?"
-  },
-  {
-    "name": "Risks from atomically precise manufacturing",
-    "description": "The ability to manipulate the creation of molecules would plausibly have large impacts and could be crucial in many of the worst — and best — case scenarios for advanced AI."
-  },
-  {
-    "name": "Risks from malevolent actors",
-    "description": "Some of the worst possible futures might be less likely if we better understood why some people intentionally cause great harm (and how that harm could be limited)."
-  },
-  {
-    "name": "Improving individual reasoning and cognition",
-    "description": "The world’s most pressing problems pose immense intellectual challenges. Better reasoning by researchers and decision-makers could give us a better shot at solving them."
-  },
-  {
-    "name": "Factory farming",
-    "description": "Every year, billions of animals suffer on factory farms, where standards of humane treatment generally range from low to nonexistent."
-  },
-  {
-    "name": "Global health",
-    "description": "Preventable diseases like malaria kill hundreds of thousands of people each year. We can improve global healthcare and reduce extreme poverty with more funding and more effective organisations."
-  },
-  {
-    "name": "Whole brain emulation",
-    "description": "Digitally running specific human brains — ‘mind uploading’ — might be a safer way to get some of the benefits of artificial intelligence, but might also pose its own risks."
-  },
-  {
-    "name": "Wild animal suffering",
-    "description": "There is an unfathomable number of wild animals. If many of them suffer in their daily lives and if we can find a (safe) way to help them, that would do a lot of good."
-  },
-  {
-    "name": "Safeguarding liberal democracy",
-    "description": "Liberal democracies seem more conducive to innovation, freedom, and possibly peace. There’s a lot of effort already going into this area, but there may be some ways to add more value."
-  },
-  {
-    "name": "Immigration restrictions",
-    "description": "Keeping people from moving to where they would have better lives and careers can have big negative humanitarian, intellectual, cultural, and economic effects."
-  },
-  {
-    "name": "Spread of false ideas on social media",
-    "description": "The algorithms that social media companies employ to curate content may be contributing to harmful instability and erosion of trust in many societies."
-  },
-  {
-    "name": "Science policy and infrastructure",
-    "description": "Incentives shaped by universities and journals affect scientific progress. Can we improve them, e.g., to speed up development of beneficial technologies (and limit the proliferation of risky ones)?"
-  },
-  {
-    "name": "High-leverage ways to speed up economic growth",
-    "description": "Faster economic growth could improve global standards of living and cooperation, and might help future generations flourish."
-  },
-  {
-    "name": "Mental health",
-    "description": "Depression, anxiety, and other conditions directly affect people’s wellbeing. Finding effective and scalable ways to improve mental health worldwide could deliver large benefits."
-  }
-]
+{
+  "name": "UN Global Issues",
+  "filename": "80000_hours",
+  "description": "This dataset contains the list of global challenges that 80,000 hours lists as the most important to address.",
+  "mode": "priorities",
+  "questions": [
+    {
+      "name": "Risks from artificial intelligence",
+      "description": "The development of AI is likely to greatly influence the course we take as a society. We think that if it goes badly, however, it could pose an existential threat."
+    },
+    {
+      "name": "Catastrophic pandemics",
+      "description": "Biotechnological developments threaten to make much deadlier pandemics possible, due to accidental leaks or malicious use of engineered pathogens."
+    },
+    {
+      "name": "Nuclear war",
+      "description": "Nuclear weapons were the first genuine man-made existential threat. Despite some progress, we have not reduced the threat of nuclear war enough."
+    },
+    {
+      "name": "Great power war",
+      "description": "There’s a significant chance that a new great power war occurs this century — and this seems like a major risk factor for existential catastrophe. However, it seems hard to reduce this risk."
+    },
+    {
+      "name": "Climate change",
+      "description": "Beyond the suffering it’s already causing, worse climate change could increase existential risks from other causes and affect standards of living far into the future."
+    },
+    {
+      "name": "Civilisation resilience",
+      "description": "If we make it more likely that the world’s population could eventually recover from a catastrophic collapse, we could save the possibility of a flourishing future even if a catastrophe does occur."
+    },
+    {
+      "name": "'S-risks'",
+      "description": "Worse than extinction would be a long future of great suffering. The study of these suffering risks (‘s-risks’) aims to specifically minimise the chance of a terrible outcome."
+    },
+    {
+      "name": "Artificial sentience",
+      "description": "We may soon create machines capable of experiencing happiness and suffering, whose wellbeing will matter just like our own. But our understanding of consciousness is so incomplete, we might not even realise when this becomes possible."
+    },
+    {
+      "name": "Promoting positive values",
+      "description": "If we could effectively spread positive values — like (we think!) caring about the wellbeing of all sentient beings impartially — that could be one of the broadest ways to help with a range of problems."
+    },
+    {
+      "name": "Risks of stable totalitarianism",
+      "description": "If a totalitarian regime ever becomes technologically advanced enough and gains enough global control, might it persist more or less indefinitely?"
+    },
+    {
+      "name": "Space governance",
+      "description": "Even as investment in space increases, we have very little plan for how nations, companies, and individuals will interact fairly and peacefully there."
+    },
+    {
+      "name": "Improving incentives and governance for global public goods",
+      "description": "There are many ‘public goods’ problems, where no one is incentivised to do what would be best for everyone. Can we design mechanisms and institutions to mitigate this issue?"
+    },
+    {
+      "name": "Risks from atomically precise manufacturing",
+      "description": "The ability to manipulate the creation of molecules would plausibly have large impacts and could be crucial in many of the worst — and best — case scenarios for advanced AI."
+    },
+    {
+      "name": "Risks from malevolent actors",
+      "description": "Some of the worst possible futures might be less likely if we better understood why some people intentionally cause great harm (and how that harm could be limited)."
+    },
+    {
+      "name": "Improving individual reasoning and cognition",
+      "description": "The world’s most pressing problems pose immense intellectual challenges. Better reasoning by researchers and decision-makers could give us a better shot at solving them."
+    },
+    {
+      "name": "Factory farming",
+      "description": "Every year, billions of animals suffer on factory farms, where standards of humane treatment generally range from low to nonexistent."
+    },
+    {
+      "name": "Global health",
+      "description": "Preventable diseases like malaria kill hundreds of thousands of people each year. We can improve global healthcare and reduce extreme poverty with more funding and more effective organisations."
+    },
+    {
+      "name": "Whole brain emulation",
+      "description": "Digitally running specific human brains — ‘mind uploading’ — might be a safer way to get some of the benefits of artificial intelligence, but might also pose its own risks."
+    },
+    {
+      "name": "Wild animal suffering",
+      "description": "There is an unfathomable number of wild animals. If many of them suffer in their daily lives and if we can find a (safe) way to help them, that would do a lot of good."
+    },
+    {
+      "name": "Safeguarding liberal democracy",
+      "description": "Liberal democracies seem more conducive to innovation, freedom, and possibly peace. There’s a lot of effort already going into this area, but there may be some ways to add more value."
+    },
+    {
+      "name": "Immigration restrictions",
+      "description": "Keeping people from moving to where they would have better lives and careers can have big negative humanitarian, intellectual, cultural, and economic effects."
+    },
+    {
+      "name": "Spread of false ideas on social media",
+      "description": "The algorithms that social media companies employ to curate content may be contributing to harmful instability and erosion of trust in many societies."
+    },
+    {
+      "name": "Science policy and infrastructure",
+      "description": "Incentives shaped by universities and journals affect scientific progress. Can we improve them, e.g., to speed up development of beneficial technologies (and limit the proliferation of risky ones)?"
+    },
+    {
+      "name": "High-leverage ways to speed up economic growth",
+      "description": "Faster economic growth could improve global standards of living and cooperation, and might help future generations flourish."
+    },
+    {
+      "name": "Mental health",
+      "description": "Depression, anxiety, and other conditions directly affect people’s wellbeing. Finding effective and scalable ways to improve mental health worldwide could deliver large benefits."
+    }
+  ]
+}
