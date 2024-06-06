@@ -1,3 +1,7 @@
+import tiktoken
+
+encoding = tiktoken.get_encoding("cl100k_base")
+
 llm_prices = {
     "gpt-4o-2024-05-13": {
         "input": 5 / 1000,
@@ -26,11 +30,16 @@ def confirm_to_continue(message):
             print("\nOperation cancelled by user.")
             break
 
+# def estimate_tokens(text, factor=1.4):
+#     words = len(text.split())  # Split text by whitespace and count the elements
+#     estimated_tokens = int(words * factor)
+#
+#     return estimated_tokens
 
-def estimate_tokens(text, factor=1.4):
-    words = len(text.split())  # Split text by whitespace and count the elements
-    estimated_tokens = int(words * factor)
-    return estimated_tokens
+def estimate_tokens(text):
+    tokens = encoding.encode(text)
+
+    return len(tokens)
 
 
 def estimate_cost(items, multiplier=1, output_multiplier=1, max_token: int = None, model="gpt-4o-2024-05-13",
@@ -45,13 +54,13 @@ def estimate_cost(items, multiplier=1, output_multiplier=1, max_token: int = Non
     """
 
     whole_string = " ".join(items)
-    token_count = estimate_tokens(whole_string) * multiplier
+    token_count = estimate_tokens(whole_string)
     cost_input = token_count * llm_prices[model]["input"] / 1000
     if max_token:
         cost_output = max_token * llm_prices[model]["output"] / 1000
     else:
         cost_output = token_count * output_multiplier * llm_prices[model]["output"] / 1000
-    cost = (cost_input + cost_output)
+    cost = (cost_input + cost_output) * multiplier
     print(f"Estimated cost: ${cost:.2f}")
     if cost > budget:
         warning_message = f"This LLM query will cost approximately ${cost:.2f}."
