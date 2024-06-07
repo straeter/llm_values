@@ -25,12 +25,6 @@ async def translate_single(answer: Answer):
     return answer
 
 
-async def translate_all(answers: list[Answer]):
-    translate_tasks = [translate_single(answer) for answer in answers]
-    answers = await asyncio.gather(*translate_tasks, return_exceptions=True)
-    return answers
-
-
 async def translate_answers(topic: str, testing=False, overwrite=False):
     """Translate answers back to English (or target language, if answer is given in English)
 
@@ -46,19 +40,20 @@ async def translate_answers(topic: str, testing=False, overwrite=False):
             topic_object = session.query(Topic).filter(Topic.filename == topic).first()
         answers = topic_object.answers
 
-        if not overwrite:
-            answers = [a for a in answers if not a.translations]
+    if not overwrite:
+        answers = [a for a in answers if not a.translations]
 
-        if testing:
-            answers = answers[:1]
+    if testing:
+        answers = answers[:1]
 
-        estimate_cost([value for q in answers for key, value in q.answers.items()])
+    estimate_cost([value for q in answers for key, value in q.answers.items()])
 
-        translated_answers = await translate_all(answers)
+    for answer in answers:
+        translated_answer = await translate_single(answer)
 
-        for ans in translated_answers:
-            session.add(ans)
-        session.commit()
+        with Session(engine) as session:
+            session.add(translated_answer)
+            session.commit()
 
 
 if __name__ == "__main__":

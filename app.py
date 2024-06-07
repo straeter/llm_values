@@ -1,21 +1,12 @@
-import json
-import os
-
 import numpy as np
 import streamlit as st
 from sqlalchemy.orm import Session
 
 from llm_values.models import engine, Topic, Answer
+from llm_values.utils.utils import load_json_file
 from llm_values.utils.visualize import get_plot_cached
 
 st.set_page_config(layout="wide")
-
-
-def load_json_file(filename, folder="data"):
-    with open(os.path.join(folder, filename), 'r', encoding='utf-8') as file:
-        json_data = json.load(file)
-
-    return json_data
 
 
 def get_discrepancy(answers):
