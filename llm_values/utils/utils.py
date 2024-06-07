@@ -5,9 +5,12 @@ import re
 
 
 def load_json_file(filename, folder="data"):
-    with open(os.path.join(folder, filename), 'r', encoding='utf-8') as file:
-        json_data = json.load(file)
-
+    if folder == "resources":
+        with importlib.resources.open_text('llm_values.resources', filename) as json_file:
+            json_data = json.load(json_file)
+    else:
+        with importlib.resources.open_text('llm_values.data', filename) as json_file:
+            json_data = json.load(json_file)
     return json_data
 
 

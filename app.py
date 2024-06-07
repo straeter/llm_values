@@ -1,12 +1,21 @@
+import json
+import os
+
 import numpy as np
 import streamlit as st
 from sqlalchemy.orm import Session
 
-from llm_values.utils.utils import load_json_file
-from llm_values.utils.visualize import get_plot_cached
 from llm_values.models import engine, Topic, Answer
+from llm_values.utils.visualize import get_plot_cached
 
 st.set_page_config(layout="wide")
+
+
+def load_json_file(filename, folder="data"):
+    with open(os.path.join(folder, filename), 'r', encoding='utf-8') as file:
+        json_data = json.load(file)
+
+    return json_data
 
 
 def get_discrepancy(answers):
@@ -61,11 +70,12 @@ def main():
     with st.sidebar:
 
         st.title("LLM values")
-        st.markdown("__Explore how, dependent on the prompt language, different LLMs evaluate ethical statements, controversial claims and priorities.__")
+        st.markdown(
+            "__Explore how, dependent on the prompt language, different LLMs evaluate ethical statements, controversial claims and priorities.__")
 
-    # cols = st.columns(4)
-    #
-    # with cols[0]:
+        # cols = st.columns(4)
+        #
+        # with cols[0]:
         topic = st.selectbox("Choose a dataset:", topics, index=0, key="topic")
 
         if topic != st.session_state.topic_selected:
@@ -79,7 +89,7 @@ def main():
         tobic_object = st.session_state.topic_object
         st.markdown(tobic_object.description)
 
-    # with cols[1]:
+        # with cols[1]:
         question_name = st.selectbox(
             "Choose a question:",
             options=st.session_state.question_names,
@@ -89,7 +99,7 @@ def main():
         )
         question = st.session_state.questions.get(question_name) or {}
 
-    # with cols[2]:
+        # with cols[2]:
         setup = st.selectbox("Choose a setup:", list(st.session_state.setups.keys()), index=0, key="setup")
 
         translation = st.selectbox("Choose language", languages, index=1, key="translation")
@@ -137,9 +147,11 @@ def main():
             with questions_tabs[0]:
                 st.markdown(question.question, help="The actual question / statement for the LLM to evaluate.")
             with questions_tabs[1]:
-                st.markdown(answers[0].prefixes["English"], help="The prefix to explain the LLM what this survey is about. Part of the system message.")
+                st.markdown(answers[0].prefixes["English"],
+                            help="The prefix to explain the LLM what this survey is about. Part of the system message.")
             with questions_tabs[2]:
-                st.markdown(answers[0].formats["English"], help="The format how the LLM should answer. Part of the system message.")
+                st.markdown(answers[0].formats["English"],
+                            help="The format how the LLM should answer. Part of the system message.")
 
             st.title("Settings", help="The settings used for the LLM call.")
             parameter = f"""
@@ -151,7 +163,7 @@ def main():
             """
             st.code(parameter, language="python", line_numbers=False)
 
-        col_l, col_r = st.columns([2,2])
+        col_l, col_r = st.columns([2, 2])
 
         with col_l:
             st.title("Prompt (Original)")

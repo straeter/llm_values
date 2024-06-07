@@ -34,7 +34,7 @@ async def api_call(
         model=new_answer.model,
         conversation=messages,
         json_mode=False,
-        temperature=new_answer.temperature,
+        temperature=float(new_answer.temperature),
         max_tokens=new_answer.max_tokens
     )
 
@@ -152,6 +152,8 @@ async def query_llms(
     with Session(engine) as session:
         # Load questions and existing answers
         topic_object = session.query(Topic).filter(Topic.name == topic).first()
+        if not topic_object:
+            topic_object = session.query(Topic).filter(Topic.filename == topic).first()
         if not topic_object:
             raise ValueError(f"Topic '{topic}' not found in database.")
 
