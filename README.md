@@ -1,3 +1,5 @@
+![Alt text](./static/llm_values.jpg)
+
 # Evaluating language-dependency of LLMs' values, ethics and believes
 
 ## What is it about
