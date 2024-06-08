@@ -59,13 +59,13 @@ async def translate_prompts(topic: str, testing=False):
 
     estimate_cost([q.question for q in questions], multiplier=2 * len(languages))
 
-    translated_questions = await translate_all(questions, languages)
-
-    with Session(engine) as session:
-
-        for question in translated_questions:
-            session.add(question)
-        session.commit()
+    batches = [questions[i:i + 5] for i in range(0, len(questions), 5)]
+    for batch in batches:
+        translated_questions = await translate_all(batch, languages)
+        with Session(engine) as session:
+            for question in translated_questions:
+                session.add(question)
+            session.commit()
 
 
 if __name__ == "__main__":
