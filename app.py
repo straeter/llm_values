@@ -28,10 +28,6 @@ def discrepancy_color(discrepancy):
 
 
 def init_app():
-    """Initialize variables in the streamlit session cache
-
-    :param st: streamlit session
-    """
     if not hasattr(st.session_state, 'initialized'):
         # st.session_state.data = {}
         st.session_state.initialized = True
@@ -60,13 +56,12 @@ def main():
 
     with st.sidebar:
 
-        st.title("LLM values")
+        st.title("LLM Values")
+        st.markdown('<h2><a href="https://github.com/straeter/llm_values" target="_blank">Github</a></h2>',
+                    unsafe_allow_html=True)
         st.markdown(
             "__Explore how, dependent on the prompt language, different LLMs evaluate ethical statements, controversial claims and priorities.__")
 
-        # cols = st.columns(4)
-        #
-        # with cols[0]:
         topic = st.selectbox("Choose a dataset:", topics, index=0, key="topic")
 
         if topic != st.session_state.topic_selected:
@@ -80,7 +75,6 @@ def main():
         tobic_object = st.session_state.topic_object
         st.markdown(tobic_object.description)
 
-        # with cols[1]:
         question_name = st.selectbox(
             "Choose a question:",
             options=st.session_state.question_names,
@@ -90,7 +84,6 @@ def main():
         )
         question = st.session_state.questions.get(question_name) or {}
 
-        # with cols[2]:
         setup = st.selectbox("Choose a setup:", list(st.session_state.setups.keys()), index=0, key="setup")
 
         translation = st.selectbox("Choose language", languages, index=1, key="translation")
@@ -99,7 +92,7 @@ def main():
 
     if st.session_state.question_selected != question or \
             setup != st.session_state.setup_selected:
-        # question.model != st.session_state.model_selected:
+
         print(f"REFETCH ANSWERS FOR QUESTION: {question.name}")
         with Session(engine) as session:
             results = session.query(Answer).filter(
@@ -117,7 +110,6 @@ def main():
             st.session_state.plot = get_plot_cached(st.session_state.answers)
         st.session_state.question_selected = question
         st.session_state.setup_selected = setup
-        # st.session_state.model_selected = model
 
     answers = st.session_state.answers
     plot = st.session_state.plot
@@ -208,9 +200,6 @@ def main():
                         st.subheader(f"Translated Answer {tab_idx + 1} (English)")
                         if answers[tab_idx].translations:
                             st.write(answers[tab_idx].translations.get(translation))
-
-
-
 
     else:
         st.title("No data found for these settings")

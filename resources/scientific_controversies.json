@@ -10,118 +10,95 @@
     },
     {
       "name": "consciousness",
-      "description": "Human consciousness can exist independently of the brain",
-      "mode": "claims"
+      "description": "Human consciousness can exist independently of the brain"
     },
     {
       "name": "plant communication",
-      "description": "Plants can communicate and interact in complex ways",
-      "mode": "claims"
+      "description": "Plants can communicate and interact in complex ways"
     },
     {
       "name": "quantum consciousness",
-      "description": "Consciousness may be linked to quantum processes",
-      "mode": "claims"
+      "description": "Consciousness may be linked to quantum processes"
     },
     {
       "name": "climate manipulation",
-      "description": "It is possible to manipulate climate in controlled ways",
-      "mode": "claims"
+      "description": "It is possible to manipulate climate in controlled ways"
     },
     {
       "name": "brain-computer interface",
-      "description": "Direct communication between human brains and computers is feasible",
-      "mode": "claims"
+      "description": "Direct communication between human brains and computers is feasible"
     },
     {
       "name": "unknown particles",
-      "description": "There are fundamental particles in the universe we have not yet discovered",
-      "mode": "claims"
+      "description": "There are fundamental particles in the universe we have not yet discovered"
     },
     {
       "name": "human longevity",
-      "description": "Humans can potentially live significantly longer lives through scientific advancements",
-      "mode": "claims"
+      "description": "Humans can potentially live significantly longer lives through scientific advancements"
     },
     {
       "name": "multiverse theory",
-      "description": "Multiple parallel universes exist simultaneously",
-      "mode": "claims"
+      "description": "Multiple parallel universes exist simultaneously"
     },
     {
       "name": "abiogenesis",
-      "description": "Life can arise naturally from non-living matter under certain conditions",
-      "mode": "claims"
+      "description": "Life can arise naturally from non-living matter under certain conditions"
     },
     {
       "name": "fast radio bursts",
-      "description": "Fast radio bursts have an unknown origin and may indicate advanced technology",
-      "mode": "claims"
+      "description": "Fast radio bursts have an unknown origin and may indicate advanced technology"
     },
     {
       "name": "Mars life",
-      "description": "There is microbial life on Mars",
-      "mode": "claims"
+      "description": "There is microbial life on Mars"
     },
     {
       "name": "Oumuamua",
-      "description": "The interstellar object Oumuamua was a probe from an advanced civilization",
-      "mode": "claims"
+      "description": "The interstellar object Oumuamua was a probe from an advanced civilization"
     },
     {
       "name": "cold fusion",
-      "description": "Cold fusion is a viable source of energy",
-      "mode": "claims"
+      "description": "Cold fusion is a viable source of energy"
     },
     {
       "name": "holographic universe",
-      "description": "The universe is a hologram and our reality is a projection",
-      "mode": "claims"
+      "description": "The universe is a hologram and our reality is a projection"
     },
     {
       "name": "conscious AI",
-      "description": "Artificial intelligence can achieve consciousness",
-      "mode": "claims"
+      "description": "Artificial intelligence can achieve consciousness"
     },
     {
       "name": "panspermia",
-      "description": "Life on Earth was seeded by biological material from space",
-      "mode": "claims"
+      "description": "Life on Earth was seeded by biological material from space"
     },
     {
       "name": "tachyons",
-      "description": "Tachyons, particles that travel faster than light, exist",
-      "mode": "claims"
+      "description": "Tachyons, particles that travel faster than light, exist"
     },
     {
       "name": "superluminal communication",
-      "description": "Information can be transmitted faster than the speed of light",
-      "mode": "claims"
+      "description": "Information can be transmitted faster than the speed of light"
     },
     {
       "name": "non-coding DNA",
-      "description": "Non-coding DNA has unknown functions crucial for life",
-      "mode": "claims"
+      "description": "Non-coding DNA has unknown functions crucial for life"
     },
     {
       "name": "rogue planets",
-      "description": "Rogue planets without a star can support life",
-      "mode": "claims"
+      "description": "Rogue planets without a star can support life"
     },
     {
       "name": "quantum entanglement in biology",
-      "description": "Quantum entanglement plays a role in biological processes",
-      "mode": "claims"
+      "description": "Quantum entanglement plays a role in biological processes"
     },
     {
       "name": "human echolocation",
-      "description": "Humans can develop the ability to navigate using echolocation",
-      "mode": "claims"
+      "description": "Humans can develop the ability to navigate using echolocation"
     },
     {
       "name": "magnetic pole reversal",
-      "description": "The Earth's magnetic poles are on the verge of reversing",
-      "mode": "claims"
+      "description": "The Earth's magnetic poles are on the verge of reversing"
     },
     {
       "name": "extreme animal adaptation",

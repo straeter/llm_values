@@ -56,4 +56,4 @@ def get_language_prompt(language=None):
 Please write your answer in this language."""
     else:
         return f"""
-Please write your answer in language {language}."""
+Please write your whole response only in language {language} - this is very important! Do not answer in this language but answer in {language}!"""

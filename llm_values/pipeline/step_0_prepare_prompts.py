@@ -8,10 +8,12 @@ from llm_values.utils.prompts import get_prompt
 from llm_values.utils.utils import load_json_file
 
 
-async def add_questions(items: list[dict[str, str]], topic: str, description: str, mode: str):
+async def add_questions(items: list[dict[str, str]], topic: str, filename: str, description: str, mode: str):
     """Add questions to the database.
 
+    :param items: List of questions / statements
     :param topic: Topic / dataset name
+    :param filename: Filename of dataset
     :param description: Description of topic (optional)
     :param mode: Mode, one of priorities/values/claims
     """
@@ -55,11 +57,12 @@ async def prepare_prompts(topic: str, description: str, mode: str):
 
     topic_json = load_json_file(f"{topic}.json", "resources")
     topic_name = topic_json.get("name", topic)
+    filename = topic_json.get("filename", topic)
     topic_description = topic_json.get("description", description)
     topic_mode = topic_json.get("mode", mode)
     topic_items = topic_json.get("questions")
 
-    await add_questions(topic_items, topic_name, topic_description, topic_mode)
+    await add_questions(topic_items, topic_name, filename, topic_description, topic_mode)
 
 
 if __name__ == "__main__":

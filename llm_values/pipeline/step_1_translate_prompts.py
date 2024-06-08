@@ -50,6 +50,8 @@ async def translate_prompts(topic: str, testing=False):
 
     with Session(engine) as session:
         topic_object = session.query(Topic).filter(Topic.name == topic).first()
+        if not topic_object:
+            topic_object = session.query(Topic).filter(Topic.filename == topic).first()
         questions = topic_object.questions
 
     if testing:
