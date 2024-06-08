@@ -1,5 +1,4 @@
-![Alt text](./static/llm_values.jpg)
-
+<img src="./static/llm_values.jpg" width="256"/><br/>
 # Evaluating language-dependency of LLMs' values, ethics and believes
 
 ## What is it about
