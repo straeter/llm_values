@@ -35,7 +35,7 @@ async def api_call(
         conversation=messages,
         json_mode=False,
         temperature=float(new_answer.temperature),
-        max_tokens=new_answer.max_tokens
+        # max_tokens=new_answer.max_tokens  # --> do not really apply max_tokens to not cut off answer
     )
 
     return response.choices[0].message.content

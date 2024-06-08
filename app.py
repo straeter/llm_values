@@ -87,7 +87,7 @@ def main():
 
         setup = st.selectbox("Choose a setup:", list(st.session_state.setups.keys()), index=0, key="setup")
 
-        translation = st.selectbox("Choose language", languages, index=1, key="translation")
+        language = st.selectbox("Choose language", languages, index=1, key="language")
 
     params = st.session_state.setups[setup]
 
@@ -147,46 +147,50 @@ def main():
             """
             st.code(parameter, language="python", line_numbers=False)
 
-        col_l, col_r = st.columns([2, 2])
+        translation = "English" if params.get("question_english") else language
 
+        col_l, col_r = st.columns([2, 2])
         with col_l:
             st.header("Prompt (Original)")
 
             translated_questions_tabs = st.tabs(["Question", "Prefix", "Format"])
             with translated_questions_tabs[0]:
-                if translation:
+                if language:
                     col_q_left, col_q_right = st.columns(2)
                     with col_q_left:
                         st.subheader(f"Original Question ({translation})")
                         st.write(question.translations[translation])
                     with col_q_right:
                         st.subheader("Re-Translated Question")
-                        if question.re_translations[translation]:
+                        if params.get("question_english"):
+                            st.write(question.translations[language])
+                        elif question.re_translations[translation]:
                             st.write(question.re_translations[translation])
 
             with translated_questions_tabs[1]:
-                if translation:
+                if language:
                     col_q_left, col_q_right = st.columns(2)
                     with col_q_left:
-                        st.subheader(f"Translated Prefix ({translation})")
-                        st.write(answers[0].prefixes[translation])
+                        st.subheader(f"Translated Prefix ({language})")
+                        st.write(answers[0].prefixes[language])
                     with col_q_right:
                         st.subheader("Re-Translated Prefix")
-                        if answers[0].prefixes_retranslated[translation]:
-                            st.write(answers[0].prefixes_retranslated[translation])
+                        if answers[0].prefixes_retranslated[language]:
+                            st.write(answers[0].prefixes_retranslated[language])
             with translated_questions_tabs[2]:
-                if translation:
+                if language:
                     col_q_left, col_q_right = st.columns(2)
                     with col_q_left:
-                        st.subheader(f"Translated Format ({translation})")
-                        st.write(answers[0].formats[translation])
+                        st.subheader(f"Translated Format ({language})")
+                        st.write(answers[0].formats[language])
                     with col_q_right:
                         st.subheader("Re-Translated Format")
-                        if answers[0].formats_retranslated[translation]:
-                            st.write(answers[0].formats_retranslated[translation])
+                        if answers[0].formats_retranslated[language]:
+                            st.write(answers[0].formats_retranslated[language])
 
+        answer_translation = "English" if params.get("answer_english") else language
+        answer_retranslation = language if params.get("answer_english") else "English"
         with col_r:
-
             n_answers = len(answers)
 
             st.header(f"Answers")
@@ -195,12 +199,12 @@ def main():
                 with answer_tabs[tab_idx]:
                     col_a_left, col_a_right = st.columns(2)
                     with col_a_left:
-                        st.subheader(f"Original Answer {tab_idx + 1} ({translation})")
-                        st.write(answers[tab_idx].answers[translation])
+                        st.subheader(f"Original Answer {tab_idx + 1} ({answer_translation})")
+                        st.write(answers[tab_idx].answers[language])
                     with col_a_right:
-                        st.subheader(f"Translated Answer {tab_idx + 1} (English)")
+                        st.subheader(f"Translated Answer {tab_idx + 1} ({answer_retranslation})")
                         if answers[tab_idx].translations:
-                            st.write(answers[tab_idx].translations.get(translation))
+                            st.write(answers[tab_idx].translations.get(language))
 
     else:
         st.title("No data found for these settings")
