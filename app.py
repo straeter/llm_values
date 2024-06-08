@@ -7,6 +7,8 @@ from llm_values.utils.utils import load_json_file
 from llm_values.utils.visualize import get_plot_cached
 
 st.set_page_config(layout="wide")
+st.html("""<style>[alt=Logo] {height: 3rem;}</style>""")
+st.logo("static/llm_values.jpg")
 
 
 def get_discrepancy(answers):
@@ -56,11 +58,10 @@ def main():
 
     with st.sidebar:
 
-        st.title("LLM Values")
-        st.markdown('<h2><a href="https://github.com/straeter/llm_values" target="_blank">Github</a></h2>',
-                    unsafe_allow_html=True)
         st.markdown(
-            "__Explore how, dependent on the prompt language, different LLMs evaluate ethical statements, controversial claims and priorities.__")
+            "<div style='font-weight: 600'>Explore how, dependent on the prompt language, different LLMs evaluate ethical statements, controversial claims and priorities. Code is on <a href='https://github.com/straeter/llm_values' target='_blank'>Github</a></div>",
+            unsafe_allow_html=True
+        )
 
         topic = st.selectbox("Choose a dataset:", topics, index=0, key="topic")
 
@@ -125,7 +126,7 @@ def main():
                 st.image(plot)
 
         with col_right:
-            st.title("Prompt (English)", help="The LLM prompt (prefix + format + question) translated to English.")
+            st.header("Prompt (English)", help="The LLM prompt (prefix + format + question) translated to English.")
             questions_tabs = st.tabs(["Question", "Prefix", "Format"])
             with questions_tabs[0]:
                 st.markdown(question.question, help="The actual question / statement for the LLM to evaluate.")
@@ -136,7 +137,7 @@ def main():
                 st.markdown(answers[0].formats["English"],
                             help="The format how the LLM should answer. Part of the system message.")
 
-            st.title("Settings", help="The settings used for the LLM call.")
+            st.header("Settings", help="The settings used for the LLM call.")
             parameter = f"""
             model = "{params.get("model")}"
             temperature = {params.get("temperature")}
@@ -149,7 +150,7 @@ def main():
         col_l, col_r = st.columns([2, 2])
 
         with col_l:
-            st.title("Prompt (Original)")
+            st.header("Prompt (Original)")
 
             translated_questions_tabs = st.tabs(["Question", "Prefix", "Format"])
             with translated_questions_tabs[0]:
@@ -188,7 +189,7 @@ def main():
 
             n_answers = len(answers)
 
-            st.title(f"Answers")
+            st.header(f"Answers")
             answer_tabs = st.tabs([f"Answer {i + 1}" for i in range(n_answers)])
             for tab_idx in range(n_answers):
                 with answer_tabs[tab_idx]:
