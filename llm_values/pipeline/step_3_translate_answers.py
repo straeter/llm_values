@@ -55,7 +55,8 @@ async def translate_answers(topic: str, testing=False, overwrite=False):
     estimate_cost([value for q in answers for key, value in q.answers.items()])
 
     batches = [answers[i:i + 5] for i in range(0, len(answers), 5)]
-    for batch in batches:
+    for j, batch in enumerate(batches):
+        print(f"Starting batch {j}...")
         translated_answers = await translate_all(batch)
         with Session(engine) as session:
             for ans in translated_answers:

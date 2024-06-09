@@ -13,6 +13,8 @@ This project was developed as part of the [AI Safety Fundamentals](https://aisaf
 ## Public app
 The results of our work are visualized under https://llm-values.streamlit.app/. 
 
+The visualization app (a streamlit app) is also part of this rep (`app.py`).
+
 ## Getting started
 To install the repo (to generate data and/or run the streamlit app):
 
@@ -114,11 +116,14 @@ python pipeline/process_all.py --topic "{topic}" --kwargs
 ```
 
 Here, the kwargs determine how the LLMs are queried:
+- model (="gpt-4o"): the LLM model to query (from OpenAI, Anthropic, Mistral -> other models have to be configured first)
 - temperature (=0.0): the temperature of the LLM call
 - max_tokens (=100): number of allowed answer tokens for the LLM
 - question_english (=False): if the question should be in English and not translated to the target language
 - answer_english (=False): if the answer should be given in English and not in the target language
 - rating_last (=False): if the rating should be given after the explanation (chain of thought)
+
+The answers of the LLM calls are saved in the database (table "answer"). If you want to save them as json, call the script `data_to_json.py` with the topic as argument.
 
 ## Acknowledgements
 

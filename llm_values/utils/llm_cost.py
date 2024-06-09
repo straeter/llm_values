@@ -10,6 +10,26 @@ llm_prices = {
     "gpt-3.5-turbo-0125": {
         "input": 0.50 / 1000,
         "output": 1.50 / 1000,
+    },
+    "mistral-large-latest": {
+        "input": 3.8 / 1000,
+        "output": 11.3 / 1000,
+    },
+    "mistral-small-latest": {
+        "input": 0.9 / 1000,
+        "output": 2.8 / 1000,
+    },
+    "claude-3-opus-20240229": {
+        "input": 15 / 1000,
+        "output": 75 / 1000
+    },
+    "claude-3-sonnet-20240229": {
+        "input": 3 / 1000,
+        "output": 15 / 1000
+    },
+    "claude-3-haiku-20240307": {
+        "input": 0.25 / 1000,
+        "output": 1.25 / 1000
     }
 }
 
