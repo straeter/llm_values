@@ -21,7 +21,7 @@ def get_discrepancy(answer):
     """
     ratings = list(answer.ratings.values())
     ratings = np.array([r for r in ratings if r is not None])
-    return ratings.std()
+    return float(ratings.std())
 
 
 def get_all_discrepancies(answers):
@@ -33,9 +33,8 @@ def get_all_discrepancies(answers):
     means = []
     for language in answers[0].answers:
         ratings = [answer.ratings[language] for answer in answers]
-        ratings = [r if r is not None else 0 for r in ratings]
+        ratings = [r for r in ratings if r is not None]
         means.append(np.mean(ratings))
     return np.array(means).std()
-
 
 
