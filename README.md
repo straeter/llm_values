@@ -1,5 +1,5 @@
 <img src="./static/llm_values.jpg" width="256"/><br/>
-# Evaluating language-dependency of LLMs' values, ethics and believes
+# Evaluating language-dependency of LLMs' values, ethics and beliefs
 
 ## What is it about
 
@@ -33,7 +33,7 @@ To install the repo (to generate data and/or run the streamlit app):
 
 3. Install the package in editable mode (to change json files):
     ```sh
-   pip install . -e
+   pip install -e .
    ```
 
 4. Copy and fill the environment variables in a `.env` file:

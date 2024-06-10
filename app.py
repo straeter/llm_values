@@ -85,7 +85,9 @@ def main():
         )
         question = st.session_state.questions.get(question_name) or {}
 
-        setup = st.selectbox("Choose a setup:", list(st.session_state.setups.keys()), index=0, key="setup")
+        setup_list = [stp for stp in list(st.session_state.setups.keys())
+                      if tobic_object.filename in stp.get("topics", [])]
+        setup = st.selectbox("Choose a setup:", setup_list, index=0, key="setup")
 
         language = st.selectbox("Choose language", languages, index=1, key="language")
 

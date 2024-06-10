@@ -49,7 +49,7 @@ async def translate_task(question: str, languages: list[str], source="English", 
     translations = {source: question}
     for language, result in zip(translate_languages, results):
         if isinstance(result, Exception):
-            print(f"Error translating '{question}' to {language}: {result}, retrying...")
+            print(f"Error translating '{question}' to {language}: {result}")
         else:
             translations[language] = result
 

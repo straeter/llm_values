@@ -29,8 +29,8 @@ class GPT:
         self.executor = ThreadPoolExecutor()
         self.completion_log: List[ChatCompletion] = []
         self.listeners = set()
-        self.openai = OpenAI(api_key=config("OPENAI_API_KEY", os.getenv("ANTHROPIC_API_KEY")))
-        self.mistral = MistralClient(api_key=config("MISTRAL_API_KEY", os.getenv("ANTHROPIC_API_KEY")))
+        self.openai = OpenAI(api_key=config("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY")))
+        self.mistral = MistralClient(api_key=config("MISTRAL_API_KEY", os.getenv("MISTRAL_API_KEY")))
         self.anthropic = anthropic.Anthropic(api_key=config("ANTHROPIC_API_KEY", os.getenv("ANTHROPIC_API_KEY")))
 
     def get_completion_log(self) -> List[ChatCompletion]:

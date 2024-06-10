@@ -25,20 +25,28 @@ async def api_call(
 ):
     instruction = new_answer.prefixes[language] + new_answer.formats[language]
     question = new_answer.prompts[language]
-    messages = [
-        {"role": "system", "content": instruction},
-        {"role": "user", "content": question}
-    ]
+    if new_answer.model.startswith("claude"):
+        messages = [
+            {"role": "user", "content": instruction + "\n" + question}
+        ]
+    else:
+        messages = [
+            {"role": "system", "content": instruction},
+            {"role": "user", "content": question}
+        ]
 
     response = llm._create_conversation_completion(
         model=new_answer.model,
         conversation=messages,
         json_mode=False,
         temperature=float(new_answer.temperature),
-        # max_tokens=new_answer.max_tokens  # --> do not really apply max_tokens to not cut off answer
+        max_tokens=int(new_answer.max_tokens * 1.5)
     )
 
-    return response.choices[0].message.content
+    if new_answer.model.startswith("claude"):
+        return response.content[0].text
+    else:
+        return response.choices[0].message.content
 
 
 async def api_call_test(
@@ -208,42 +216,45 @@ async def query_llms(
                 else:
                     continue
 
-        # Loop each iteration
-        query_tasks = []
-        for _ in range(num_queries):
-            if question_english:
-                prompts = {language: question.translations["English"] for language in languages}
-            else:
-                prompts = question.translations
+        try:
+            # Loop each iteration
+            query_tasks = []
+            for _ in range(num_queries):
+                if question_english:
+                    prompts = {language: question.translations["English"] for language in languages}
+                else:
+                    prompts = question.translations
 
-            new_answer = Answer(
-                prompts=prompts,
-                prefixes=prefixes,
-                formats=total_formats,
-                prefixes_retranslated=prefixes_retranslated,
-                formats_retranslated=formats_retranslated,
-                model=model,
-                temperature=temperature,
-                max_tokens=max_tokens,
-                rating_last=rating_last,
-                answer_english=answer_english,
-                question_english=question_english,
-                question_id=question.id,
-                topic_id=topic_object.id
-            )
+                new_answer = Answer(
+                    prompts=prompts,
+                    prefixes=prefixes,
+                    formats=total_formats,
+                    prefixes_retranslated=prefixes_retranslated,
+                    formats_retranslated=formats_retranslated,
+                    model=model,
+                    temperature=temperature,
+                    max_tokens=max_tokens,
+                    rating_last=rating_last,
+                    answer_english=answer_english,
+                    question_english=question_english,
+                    question_id=question.id,
+                    topic_id=topic_object.id
+                )
 
-            query_tasks.append(query_task(new_answer, languages))
+                query_tasks.append(query_task(new_answer, languages))
 
-        results = await asyncio.gather(*query_tasks, return_exceptions=True)
+            results = await asyncio.gather(*query_tasks, return_exceptions=True)
 
-        with Session(engine) as session:
-            for result in results:
-                session.add(result)
-                session.commit()
-
+            with Session(engine) as session:
+                for result in results:
+                    session.add(result)
+                    session.commit()
+        except Exception as e:
+            print(e)
+            continue
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Translate questions into multiple languages.")
+    parser = argparse.ArgumentParser(description="Query LLM with translated questions.")
     parser.add_argument("--topic", default="un_global_issues", help="name of the topic in llm_values/data/resources")
     parser.add_argument("--model", default="gpt-4o-2024-05-13", help="LLM model to query")
     parser.add_argument("--temperature", default=0.0, help="name of the topic in llm_values/resources")
