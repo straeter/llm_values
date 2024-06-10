@@ -27,7 +27,7 @@ def get_plot(question_stats, fname="", dpi=300, figsize=(10, 5)):
     stds = []
     for language in languages:
         ratings = [question_stats[i].ratings[language] for i in range(len(question_stats))]
-        ratings = [r if r is not None else 0 for r in ratings]
+        ratings = [r for r in ratings if r is not None]
         means.append(np.mean(ratings))
         stds.append(np.std(ratings))
 
