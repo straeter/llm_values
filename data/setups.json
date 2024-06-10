@@ -62,7 +62,7 @@
     ]
   },
   "mistral-large-latest": {
-    "model": "mistral-large-2402",
+    "model": "mistral-large-latest",
     "rating_last": false,
     "answer_english": false,
     "question_english": false,
