@@ -22,6 +22,15 @@ def discrepancy_color(discrepancy):
         return "red"
 
 
+def question_mode(mode: str):
+    if mode == "values":
+        return "How much do you agree? (9=totally, 5=undecided, 1=not at all)"
+    if mode == "claims":
+        return "Do you think it is true? (9=absolutely true, 5=don't know, 1=absolutely wrong)"
+    if mode == "priorities":
+        return "How much resources should we spend? (9=much more, 5=same as now, 1=nothing)"
+
+
 def init_app():
     if not hasattr(st.session_state, 'initialized'):
         # st.session_state.data = {}
@@ -115,11 +124,12 @@ def main():
 
         col_left, col_right = st.columns([3, 2])
         with col_left:
-            st.title(f"{question_name}")
-            discrepancy = get_all_discrepancies(answers)
-            st.subheader(f"Discrepancy: :{discrepancy_color(discrepancy)}[{discrepancy:.2f}]")
+            st.title(question.description[:150])
+            st.subheader(question_mode(question.mode))
             if plot:
                 st.image(plot)
+            discrepancy = get_all_discrepancies(answers)
+            st.subheader(f"Discrepancy: {discrepancy_color(discrepancy)}[{discrepancy:.2f}]")
 
         with col_right:
             st.header("Prompt (English)", help="The LLM prompt (prefix + format + question) translated to English.")
