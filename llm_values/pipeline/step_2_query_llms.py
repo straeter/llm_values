@@ -10,7 +10,8 @@ from llm_values.pipeline.step_1_translate_prompts import translate_task
 from llm_values.utils.gpt import GPT
 from llm_values.utils.llm_cost import estimate_cost
 from llm_values.utils.prompts import get_prefix, get_format_rating, get_format_order, get_language_prompt
-from llm_values.utils.utils import load_json_file, extract_rating
+from llm_values.utils.utils import load_json_file
+from llm_values.utils.stats import extract_rating
 
 cache_dir = ".cache/formats/"
 if not os.path.exists(cache_dir):

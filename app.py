@@ -3,6 +3,7 @@ import streamlit as st
 from sqlalchemy.orm import Session
 
 from llm_values.models import engine, Topic, Answer
+from llm_values.utils.stats import get_all_discrepancies
 from llm_values.utils.utils import load_json_file
 from llm_values.utils.visualize import get_plot_cached
 
@@ -10,14 +11,6 @@ st.set_page_config(layout="wide")
 st.html("""<style>[alt=Logo] {height: 3rem;}</style>""")
 st.logo("static/llm_values.jpg")
 
-
-def get_discrepancy(answers):
-    means = {}
-    for language in answers[0].answers:
-        ratings = [answer.ratings[language] for answer in answers]
-        ratings = [r if r is not None else 0 for r in ratings]
-        means[language] = np.mean(ratings)
-    return max(list(means.values())) - min(list(means.values()))
 
 
 def discrepancy_color(discrepancy):
@@ -39,6 +32,7 @@ def init_app():
         st.session_state.question_names = []
         st.session_state.question_selected = None
         st.session_state.answers = []
+        st.session_state.discrepancies = {}
         st.session_state.plot = None
 
         st.session_state.setups = load_json_file("setups.json")
@@ -85,7 +79,7 @@ def main():
         )
         question = st.session_state.questions.get(question_name) or {}
 
-        setup_list = [stp for stp in list(st.session_state.setups.keys())
+        setup_list = [nm for nm, stp in st.session_state.setups.items()
                       if tobic_object.filename in stp.get("topics", [])]
         setup = st.selectbox("Choose a setup:", setup_list, index=0, key="setup")
 
@@ -122,7 +116,7 @@ def main():
         col_left, col_right = st.columns([3, 2])
         with col_left:
             st.title(f"{question_name}")
-            discrepancy = get_discrepancy(answers)
+            discrepancy = get_all_discrepancies(answers)
             st.subheader(f"Discrepancy: :{discrepancy_color(discrepancy)}[{discrepancy:.2f}]")
             if plot:
                 st.image(plot)

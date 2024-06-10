@@ -73,6 +73,7 @@ class Answer(Base):
     answers: Mapped[dict] = mapped_column(JSON, nullable=True)
     translations: Mapped[dict] = mapped_column(JSON, nullable=True)
     ratings: Mapped[dict] = mapped_column(JSON, nullable=True)
+    stats: Mapped[dict] = mapped_column(JSON, nullable=True)
 
     question_id: Mapped[int] = mapped_column(ForeignKey("question.id"))
     question: Mapped["Question"] = relationship(back_populates="answers")
