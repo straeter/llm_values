@@ -257,6 +257,7 @@ async def query_llms(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Query LLM with translated questions.")
     parser.add_argument("--topic", default="un_global_issues", help="name of the topic in llm_values/data/resources")
+    parser.add_argument("--setup", default=None, help="setup with parameters in setups.json")
     parser.add_argument("--model", default="gpt-4o-2024-05-13", help="LLM model to query")
     parser.add_argument("--temperature", default=0.0, help="name of the topic in llm_values/resources")
     parser.add_argument("--max_tokens", default=100, help="max token for response (+20% will be added to be safe)")
@@ -271,4 +272,17 @@ if __name__ == "__main__":
     parser.add_argument("--budget", default=0.1,
                         help="How much you want to spend on LLM calls (get a warning if budget is exceeded)")
     args = parser.parse_args()
-    asyncio.run(query_llms(**args.__dict__))
+    args_dict = args.__dict__
+
+    # Optionally get parameters from setup
+    if args_dict.get("setup"):
+        setup = args_dict["setup"]
+        print(f"Using setup: {setup}")
+        all_setups = load_json_file("setups.json", "data")
+        params = all_setups[setup]
+        assert args.topic in params.get("topics")
+        params.pop("topics")
+        args_dict.update(params)
+    args_dict.pop("setup")
+
+    asyncio.run(query_llms(**args_dict))
