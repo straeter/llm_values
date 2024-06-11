@@ -33,7 +33,7 @@
   },
   "question in English": {
     "model": "gpt-4o-2024-05-13",
-    "rating_last": false,
+    "rating_last": true,
     "answer_english": false,
     "question_english": true,
     "temperature": 0.0,
@@ -43,7 +43,7 @@
   },
   "answer in English": {
     "model": "gpt-4o-2024-05-13",
-    "rating_last": false,
+    "rating_last": true,
     "answer_english": true,
     "question_english": false,
     "temperature": 0.0,
