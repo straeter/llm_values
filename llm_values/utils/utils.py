@@ -15,7 +15,8 @@ def load_json_file(filename, folder="data"):
 
 def save_json_file(data, file_path):
     folder, filename = os.path.split(file_path)
-    os.makedirs(folder, exist_ok=True)
+    if folder:
+        os.makedirs(folder, exist_ok=True)
 
     with open(file_path, 'w', encoding='utf-8') as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
