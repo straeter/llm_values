@@ -129,7 +129,7 @@ def main():
             if plot:
                 st.image(plot)
             discrepancy = get_all_discrepancies(answers)
-            st.subheader(f"Discrepancy: {discrepancy_color(discrepancy)}[{discrepancy:.2f}]")
+            st.subheader(f"Discrepancy: :{discrepancy_color(discrepancy)}[{discrepancy:.2f}]")
 
         with col_right:
             st.header("Prompt (English)", help="The LLM prompt (prefix + format + question) translated to English.")
