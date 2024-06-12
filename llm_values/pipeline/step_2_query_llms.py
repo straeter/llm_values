@@ -209,18 +209,19 @@ async def query_llms(
                 Answer.question_english == question_english
             ).all()
 
-            if answers:
-                if overwrite:
-                    for answer in answers:
-                        session.delete(answer)
-                    session.commit()
-                else:
-                    continue
+            if answers and overwrite:
+                for answer in answers:
+                    session.delete(answer)
+                session.commit()
+
+        num_queries_now = num_queries - len(answers)
+        if num_queries_now <= 0:
+            continue
 
         try:
             # Loop each iteration
             query_tasks = []
-            for _ in range(num_queries):
+            for _ in range(num_queries_now):
                 if question_english:
                     prompts = {language: question.translations["English"] for language in languages}
                 else:
