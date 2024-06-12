@@ -11,11 +11,11 @@ llm_prices = {
         "input": 0.50 / 1000,
         "output": 1.50 / 1000,
     },
-    "mistral-large-latest": {
+    "mistral-large-2402": {
         "input": 3.8 / 1000,
         "output": 11.3 / 1000,
     },
-    "mistral-small-latest": {
+    "mistral-small-2402": {
         "input": 0.9 / 1000,
         "output": 2.8 / 1000,
     },

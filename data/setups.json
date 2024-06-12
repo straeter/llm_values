@@ -61,8 +61,8 @@
       "controversial_statements"
     ]
   },
-  "mistral-large-latest": {
-    "model": "mistral-large-latest",
+  "mistral-large": {
+    "model": "mistral-large-2402",
     "rating_last": false,
     "answer_english": false,
     "question_english": false,
