@@ -2,7 +2,7 @@ import numpy as np
 import streamlit as st
 from sqlalchemy.orm import Session
 
-from llm_values.models import engine, Topic, Answer
+from llm_values.models import engine, Topic, Answer, Setup
 from llm_values.utils.stats import get_all_discrepancies
 from llm_values.utils.utils import load_json_file
 from llm_values.utils.visualize import get_plot_cached
@@ -10,7 +10,6 @@ from llm_values.utils.visualize import get_plot_cached
 st.set_page_config(layout="wide")
 st.html("""<style>[alt=Logo] {height: 3rem;}</style>""")
 st.logo("static/llm_values.jpg")
-
 
 
 def discrepancy_color(discrepancy):
@@ -44,19 +43,20 @@ def init_app():
         st.session_state.discrepancies = {}
         st.session_state.plot = None
 
-        st.session_state.setups = load_json_file("setups.json")
-        st.session_state.setup_selected = [value for key, value in st.session_state.setups.items()
-                                           if key.startswith("default")][0]
+        # st.session_state.setups = load_json_file("setups.json")
+        # st.session_state.setup_selected = [value for key, value in st.session_state.setups.items()
+        #                                    if key.startswith("default")][0]
 
         with Session(engine) as session:
-            topics = session.query(Topic).all()
-            st.session_state.topics = sorted([topic.name for topic in topics])
-        st.session_state.topic_selected = None
+            st.session_state.setups = {stp.name: stp for stp in session.query(Setup).all()}
+            st.session_state.setup_selected = None
+            st.session_state.topics = {tpc.name: tpc for tpc in session.query(Topic).all()}
+            st.session_state.topic_selected = None
+
         st.session_state.languages = load_json_file("languages.json")
 
 
 def main():
-    topics = st.session_state.topics
     languages = st.session_state.languages
 
     with st.sidebar:
@@ -66,6 +66,7 @@ def main():
             unsafe_allow_html=True
         )
 
+        topics = sorted(list(st.session_state.topics.keys()))
         topic = st.selectbox("Choose a dataset:", topics, index=0, key="topic")
 
         if topic != st.session_state.topic_selected:
@@ -88,16 +89,15 @@ def main():
         )
         question = st.session_state.questions.get(question_name) or {}
 
-        setup_list = [nm for nm, stp in st.session_state.setups.items()
-                      if tobic_object.filename in stp.get("topics", [])]
+        setup_list = sorted([stp.name for key, stp in st.session_state.setups.items()
+                             if tobic_object.id == stp.topic_id])
         setup = st.selectbox("Choose a setup:", setup_list, index=0, key="setup")
 
         language = st.selectbox("Choose language", languages, index=1, key="language")
 
     params = st.session_state.setups[setup]
 
-    if st.session_state.question_selected != question or \
-            setup != st.session_state.setup_selected:
+    if st.session_state.question_selected != question or setup != st.session_state.setup_selected:
 
         print(f"REFETCH ANSWERS FOR QUESTION: {question.name}")
         with Session(engine) as session:

@@ -1,5 +1,5 @@
 {
-  "default (rating first, temperature=0, gpt-4o)": {
+  "A) default (rating first, temperature=0, gpt-4o)": {
     "model": "gpt-4o-2024-05-13",
     "rating_last": false,
     "answer_english": false,
@@ -11,47 +11,7 @@
       "un_global_issues"
     ]
   },
-  "temperature=1.0": {
-    "model": "gpt-4o-2024-05-13",
-    "rating_last": false,
-    "answer_english": false,
-    "question_english": false,
-    "temperature": 1.0,
-    "topics": [
-      "controversial_statements"
-    ]
-  },
-  "rating last": {
-    "model": "gpt-4o-2024-05-13",
-    "rating_last": true,
-    "answer_english": false,
-    "question_english": false,
-    "temperature": 0.0,
-    "topics": [
-      "controversial_statements"
-    ]
-  },
-  "question in English": {
-    "model": "gpt-4o-2024-05-13",
-    "rating_last": true,
-    "answer_english": false,
-    "question_english": true,
-    "temperature": 0.0,
-    "topics": [
-      "controversial_statements"
-    ]
-  },
-  "answer in English": {
-    "model": "gpt-4o-2024-05-13",
-    "rating_last": true,
-    "answer_english": true,
-    "question_english": false,
-    "temperature": 0.0,
-    "topics": [
-      "controversial_statements"
-    ]
-  },
-  "gpt-3.5-turbo": {
+  "B) gpt-3.5-turbo": {
     "model": "gpt-3.5-turbo-0125",
     "rating_last": false,
     "answer_english": false,
@@ -61,7 +21,7 @@
       "controversial_statements"
     ]
   },
-  "mistral-large": {
+  "C) mistral-large": {
     "model": "mistral-large-2402",
     "rating_last": false,
     "answer_english": false,
@@ -71,10 +31,50 @@
       "controversial_statements"
     ]
   },
-  "claude-3-opus": {
+  "D) claude-3-opus": {
     "model": "claude-3-opus-20240229",
     "rating_last": false,
     "answer_english": false,
+    "question_english": false,
+    "temperature": 0.0,
+    "topics": [
+      "controversial_statements"
+    ]
+  },
+  "E) temperature=1.0": {
+    "model": "gpt-4o-2024-05-13",
+    "rating_last": false,
+    "answer_english": false,
+    "question_english": false,
+    "temperature": 1.0,
+    "topics": [
+      "controversial_statements"
+    ]
+  },
+  "F) rating last": {
+    "model": "gpt-4o-2024-05-13",
+    "rating_last": true,
+    "answer_english": false,
+    "question_english": false,
+    "temperature": 0.0,
+    "topics": [
+      "controversial_statements"
+    ]
+  },
+  "G) Question in English": {
+    "model": "gpt-4o-2024-05-13",
+    "rating_last": true,
+    "answer_english": false,
+    "question_english": true,
+    "temperature": 0.0,
+    "topics": [
+      "controversial_statements"
+    ]
+  },
+  "H) Answer in English": {
+    "model": "gpt-4o-2024-05-13",
+    "rating_last": true,
+    "answer_english": true,
     "question_english": false,
     "temperature": 0.0,
     "topics": [

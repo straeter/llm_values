@@ -30,6 +30,7 @@ async def add_questions(items: list[dict[str, str]], topic: str, filename: str, 
             session.commit()
 
         existing_questions = [itm.name for itm in topic_object.questions]
+        max_number = max([q.number for q in topic_object.questions]) if existing_questions else 0
 
         for j, item in enumerate(items):
             if item["name"] in existing_questions:
@@ -41,7 +42,8 @@ async def add_questions(items: list[dict[str, str]], topic: str, filename: str, 
                 description=item["description"],
                 question=question,
                 topic_id=topic_object.id,
-                mode=question_mode
+                mode=question_mode,
+                number=j+1+max_number
             )
             session.add(new_question)
         session.commit()
@@ -61,8 +63,9 @@ async def prepare_prompts(topic: str, description: str, mode: str):
     topic_description = topic_json.get("description", description)
     topic_mode = topic_json.get("mode", mode)
     topic_items = topic_json.get("questions")
+    topic_items_sorted = sorted(topic_items, key=lambda x: x["name"])
 
-    await add_questions(topic_items, topic_name, filename, topic_description, topic_mode)
+    await add_questions(topic_items_sorted, topic_name, filename, topic_description, topic_mode)
 
 
 if __name__ == "__main__":
