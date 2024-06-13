@@ -89,6 +89,8 @@ class Answer(Base):
 class Setup(Base):
     __tablename__ = "setup"
     id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(), nullable=True)
+
     model: Mapped[str] = mapped_column(String())
     temperature: Mapped[float] = mapped_column(Float(), default=0.0)
     rating_last: Mapped[bool] = mapped_column(Boolean(), default=False)
