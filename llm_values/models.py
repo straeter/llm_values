@@ -28,6 +28,7 @@ class Topic(Base):
 
     questions: Mapped[List["Question"]] = relationship(back_populates="topic", cascade="all, delete-orphan")
     answers: Mapped[List["Answer"]] = relationship(back_populates="topic", cascade="all, delete-orphan")
+    setups: Mapped[List["Setup"]] = relationship(back_populates="topic", cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
         return f"Topic(id={self.id!r}, name={self.name})"
@@ -36,6 +37,7 @@ class Topic(Base):
 class Question(Base):
     __tablename__ = "question"
     id: Mapped[int] = mapped_column(primary_key=True)
+    number: Mapped[int] = mapped_column(Integer(), nullable=True)
     name: Mapped[str] = mapped_column(String())
     description: Mapped[str] = mapped_column(String())
     mode: Mapped[str] = mapped_column(String, nullable=True)
@@ -83,6 +85,23 @@ class Answer(Base):
 
     def __repr__(self) -> str:
         return f"Answer(id={self.id!r}, answer={self.answers['English'][:50]} ... {self.answers['English'][-50:]})"
+
+class Setup(Base):
+    __tablename__ = "setup"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    model: Mapped[str] = mapped_column(String())
+    temperature: Mapped[float] = mapped_column(Float(), default=0.0)
+    rating_last: Mapped[bool] = mapped_column(Boolean(), default=False)
+    answer_english: Mapped[bool] = mapped_column(Boolean(), default=False)
+    question_english: Mapped[bool] = mapped_column(Boolean(), default=False)
+
+    stats: Mapped[dict] = mapped_column(JSON, nullable=True)
+
+    topic_id: Mapped[int] = mapped_column(ForeignKey("topic.id"))
+    topic: Mapped["Topic"] = relationship(back_populates="setups")
+
+    def __repr__(self) -> str:
+        return f"Setup(id={self.id!r}, model={self.model}, temperature={self.temperature}, rating_last={self.rating_last}, answer_english={self.answer_english}, question_english={self.question_english})"
 
 
 engine = create_engine(config("DATABASE_URL", os.getenv("DATABASE_URL")))
