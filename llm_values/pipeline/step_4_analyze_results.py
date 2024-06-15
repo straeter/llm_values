@@ -5,9 +5,9 @@ from sqlalchemy.orm import Session
 from sqlalchemy.orm.attributes import flag_modified
 
 from llm_values.models import engine, Topic, Answer, Setup
-from llm_values.utils.stats import get_all_discrepancies, get_cleaned_discrepancies, get_refusal_ratio, \
-    get_average_discrepancy, get_average_refusal_rate, get_language_refusal_rate, get_language_std, \
-    get_cleaned_language_std
+from llm_values.utils.stats import get_all_discrepancies, get_cleaned_discrepancies, get_refusal_rates, \
+    get_average, get_std, get_language_refusal_rate, get_language_std, \
+    get_cleaned_language_std, get_refusal_rates, get_failure_rates
 from llm_values.utils.utils import load_json_file
 
 
@@ -45,25 +45,30 @@ async def calc_stats(topic_object, params: dict):
         try:
             all_discrepancies = {}
             all_cleaned_discrepancies = {}
-            all_refusal_ratios = {}
+            all_refusal_rates = {}
+            all_failure_rates={}
             for question in questions:
                 aggregated_answers = [answer for answer in results if answer.question_id == question.id]
                 all_discrepancies[question.number] = get_all_discrepancies(aggregated_answers)
                 all_cleaned_discrepancies[question.number] = get_cleaned_discrepancies(aggregated_answers)
-                all_refusal_ratios[question.number] = get_refusal_ratio(aggregated_answers)
+                all_refusal_rates[question.number] = get_refusal_rates(aggregated_answers)
+                all_failure_rates[question.number] = get_failure_rates(aggregated_answers)
 
             all_stats["discrepancies"] = all_discrepancies
             all_stats["cleaned_discrepancies"] = all_cleaned_discrepancies
-            all_stats["refusal_ratios"] = all_refusal_ratios
+            all_stats["refusal_rates"] = all_refusal_rates
+            all_stats["failure_rates"] = all_failure_rates
 
-            all_stats["topic_discrepancy"] = get_average_discrepancy(all_discrepancies)
-            all_stats["clean_topic_discrepancy"] = get_average_discrepancy(
+            all_stats["dataset_discrepancy"] = get_average(all_discrepancies)
+            all_stats["cleaned_dataset_discrepancy"] = get_average(
                 all_cleaned_discrepancies)
-            all_stats["refusal_ratio"] = get_average_refusal_rate(all_refusal_ratios)
+            all_stats["refusal_rate"] = get_average(all_refusal_rates)
 
             all_stats["language_refusal_rate"] = get_language_refusal_rate(results)
             all_stats["language_std"] = get_language_std(results)
             all_stats["cleaned_language_std"] = get_cleaned_language_std(results)
+
+            all_stats["failure_rate"] = get_average(all_failure_rates)
         except Exception as e:
             print(e)
     return all_stats
@@ -81,6 +86,7 @@ async def analyze_results(setup_name: str):
         topics = session.query(Topic).all()
 
         for setup in setups:
+            print(f"Calculating stats for setup {setup.name}")
             topic = [topic for topic in topics if topic.id == setup.topic_id][0]
             params = setup.dict()
             [params.pop(key) for key in ["stats", "id", "name"]]

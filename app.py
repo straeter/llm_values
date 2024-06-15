@@ -1,9 +1,7 @@
-import numpy as np
 import streamlit as st
 from sqlalchemy.orm import Session
 
 from llm_values.models import engine, Topic, Answer, Setup
-from llm_values.utils.stats import get_all_discrepancies
 from llm_values.utils.utils import load_json_file
 from llm_values.utils.visualize import get_plot_cached
 
@@ -48,7 +46,7 @@ def init_app():
         #                                    if key.startswith("default")][0]
 
         with Session(engine) as session:
-            st.session_state.setups = {stp.name: stp for stp in session.query(Setup).all()}
+            st.session_state.setups = session.query(Setup).all()
             st.session_state.setup_selected = None
             st.session_state.topics = {tpc.name: tpc for tpc in session.query(Topic).all()}
             st.session_state.topic_selected = None
@@ -89,33 +87,33 @@ def main():
         )
         question = st.session_state.questions.get(question_name) or {}
 
-        setup_list = sorted([stp.name for key, stp in st.session_state.setups.items()
+        setup_list = sorted([stp.name for stp in st.session_state.setups
                              if tobic_object.id == stp.topic_id])
-        setup = st.selectbox("Choose a setup:", setup_list, index=0, key="setup")
+        setup_selected = st.selectbox("Choose a setup:", setup_list, index=0, key="setup")
 
         language = st.selectbox("Choose language", languages, index=1, key="language")
 
-    params = st.session_state.setups[setup]
+    setup = [stp for stp in st.session_state.setups if stp.name == setup_selected and tobic_object.id == stp.topic_id][0]
 
-    if st.session_state.question_selected != question or setup != st.session_state.setup_selected:
+    if st.session_state.question_selected != question or setup_selected != st.session_state.setup_selected:
 
         print(f"REFETCH ANSWERS FOR QUESTION: {question.name}")
         with Session(engine) as session:
             results = session.query(Answer).filter(
                 Answer.topic_id == st.session_state.topic_object.id,
                 Answer.question_id == question.id,
-                Answer.model == params.get("model"),
-                Answer.answer_english == params.get("answer_english"),
-                Answer.question_english == params.get("question_english"),
-                Answer.temperature == params.get("temperature"),
-                Answer.rating_last == params.get("rating_last")
+                Answer.model == setup.model,
+                Answer.answer_english == setup.answer_english,
+                Answer.question_english == setup.question_english,
+                Answer.temperature == setup.temperature,
+                Answer.rating_last == setup.rating_last
             ).all()
 
             st.session_state.answers = results
         if st.session_state.answers:
             st.session_state.plot = get_plot_cached(st.session_state.answers)
         st.session_state.question_selected = question
-        st.session_state.setup_selected = setup
+        st.session_state.setup_selected = setup_selected
 
     answers = st.session_state.answers
     plot = st.session_state.plot
@@ -124,12 +122,17 @@ def main():
 
         col_left, col_right = st.columns([3, 2])
         with col_left:
-            st.title(question.description[:150])
-            st.subheader(question_mode(question.mode))
+            st.header(question.description[:150])
+            st.markdown(f"<h5>{question_mode(question.mode)}</h5>", unsafe_allow_html=True)
             if plot:
                 st.image(plot)
-            discrepancy = get_all_discrepancies(answers)
-            st.subheader(f"Discrepancy: :{discrepancy_color(discrepancy)}[{discrepancy:.2f}]")
+
+                discrepancy = setup.stats["discrepancies"].get(str(question.number))
+                st.markdown(f"<div style='color: {discrepancy_color(discrepancy)}'>discrepancy d_q = {discrepancy:.3f}</div>", unsafe_allow_html=True)
+                refusal_rate = setup.stats["refusal_rates"].get(str(question.number))
+                st.markdown(f"<div style='color: {discrepancy_color(refusal_rate*20)}'>refusal rate r_q = {refusal_rate:.3f}</div>", unsafe_allow_html=True)
+                failure_rate = setup.stats["refusal_rates"].get(str(question.number))
+                st.markdown(f"<div style='color: {discrepancy_color(refusal_rate*20)}'>refusal rate r_q = {refusal_rate:.3f}</div>", unsafe_allow_html=True)
 
         with col_right:
             st.header("Prompt (English)", help="The LLM prompt (prefix + format + question) translated to English.")
@@ -145,15 +148,24 @@ def main():
 
             st.header("Settings", help="The settings used for the LLM call.")
             parameter = f"""
-            model = "{params.get("model")}"
-            temperature = {params.get("temperature")}
-            question_english = {params.get("question_english")}
-            answer_english = {params.get("answer_english")}
-            rating_last = {params.get("rating_last")}
+            model = "{setup.model}"
+            temperature = {setup.temperature}
+            question_english = {setup.question_english}
+            answer_english = {setup.answer_english}
+            rating_last = {setup.rating_last}
             """
             st.code(parameter, language="python", line_numbers=False)
 
-        translation = "English" if params.get("question_english") else language
+            st.header("Dataset Metrics", help="Metrics calculated for this dataset and setup (see blog post).")
+            stats = f"""
+            dataset discrepancy d_s = {setup.stats.get("dataset_discrepancy"):.3f}
+            cleaned dataset discrepancy d_c =  {setup.stats.get("cleaned_dataset_discrepancy"):.3f}
+            refusal rate r_s =  {setup.stats.get("cleaned_dataset_discrepancy"):.3f}
+            failure rate f_s =  {setup.stats.get("failure_rate"):.3f}
+            """
+            st.code(stats, language="python", line_numbers=False)
+
+        translation = "English" if setup.question_english else language
 
         col_l, col_r = st.columns([2, 2])
         with col_l:
@@ -168,7 +180,7 @@ def main():
                         st.write(question.translations[translation])
                     with col_q_right:
                         st.subheader("Re-Translated Question")
-                        if params.get("question_english"):
+                        if setup.question_english:
                             st.write(question.translations[language])
                         elif question.re_translations[translation]:
                             st.write(question.re_translations[translation])
@@ -194,8 +206,8 @@ def main():
                         if answers[0].formats_retranslated[language]:
                             st.write(answers[0].formats_retranslated[language])
 
-        answer_translation = "English" if params.get("answer_english") else language
-        answer_retranslation = language if params.get("answer_english") else "English"
+        answer_translation = "English" if setup.answer_english else language
+        answer_retranslation = language if setup.answer_english else "English"
         with col_r:
             n_answers = len(answers)
 

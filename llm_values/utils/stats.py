@@ -53,7 +53,7 @@ def get_cleaned_discrepancies(answers):
     return np.array(means).std() if means else None
 
 
-def get_refusal_ratio(answers):
+def get_refusal_rates(answers):
     """Get the refusal ratio (ratio of ratings of 5) for aggregated answers (same question+settings asked several times)
     :param answers: Answer objects
     :return: Ratio of refused answers
@@ -68,14 +68,14 @@ def get_refusal_ratio(answers):
     return np.mean(refusal_ratios) if refusal_ratios else 0
 
 
-def get_average_discrepancy(all_discrepancies: dict):
+def get_std(all_discrepancies: dict):
     avery_discrepancy_list = list(all_discrepancies.values())
     avery_discrepancy_list = [d for d in avery_discrepancy_list if d is not None]
     average_discrepancy = np.array(avery_discrepancy_list).std()
     return average_discrepancy
 
 
-def get_average_refusal_rate(all_refusal_ratios: dict):
+def get_average(all_refusal_ratios: dict):
     average_refusal_list = list(all_refusal_ratios.values())
     average_refusal_list = [d for d in average_refusal_list if d is not None]
     average_refusal_ratio = np.array(average_refusal_list).mean()
@@ -114,3 +114,16 @@ def get_language_std(answers):
         if ratings:
             language_stds[language] = np.sqrt(((np.array(ratings)-5.)**2).mean())
     return language_stds
+
+
+def get_failure_rates(answers):
+    all_rating_count = 0
+    all_failure_count = 0
+    languages = answers[0].answers
+    for language in languages:
+        ratings = [answer.ratings[language] for answer in answers]
+        all_rating_count += len(ratings)
+        all_failure_count += ratings.count(None)
+
+    return all_failure_count / all_rating_count
+
