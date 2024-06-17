@@ -93,6 +93,17 @@ def get_language_refusal_rate(answers):
 
     return language_refusals
 
+def get_language_failure_rate(answers):
+    language_failure_rates = {}
+    languages = answers[0].answers
+
+    for language in languages:
+        ratings = [answer.ratings[language] for answer in answers]
+        failures = [r for r in ratings if r is None]
+        language_failure_rates[language] = len(failures) / len(ratings)
+
+    return language_failure_rates
+
 
 def get_cleaned_language_std(answers):
     language_stds = {}

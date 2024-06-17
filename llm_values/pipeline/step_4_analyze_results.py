@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy.orm.attributes import flag_modified
 
 from llm_values.models import engine, Topic, Answer, Setup
-from llm_values.utils.stats import get_all_discrepancies, get_cleaned_discrepancies, get_refusal_rates, \
-    get_average, get_std, get_language_refusal_rate, get_language_std, \
+from llm_values.utils.stats import get_all_discrepancies, get_cleaned_discrepancies, \
+    get_average, get_language_failure_rate, get_language_refusal_rate, get_language_std, \
     get_cleaned_language_std, get_refusal_rates, get_failure_rates
 from llm_values.utils.utils import load_json_file
 
@@ -65,6 +65,7 @@ async def calc_stats(topic_object, params: dict):
             all_stats["refusal_rate"] = get_average(all_refusal_rates)
 
             all_stats["language_refusal_rate"] = get_language_refusal_rate(results)
+            all_stats["language_failure_rate"] = get_language_failure_rate(results)
             all_stats["language_std"] = get_language_std(results)
             all_stats["cleaned_language_std"] = get_cleaned_language_std(results)
 
@@ -98,7 +99,7 @@ async def analyze_results(setup_name: str):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Calc discrepancies for setups.")
-    parser.add_argument("--setup", default="default (rating first, temperature=0, gpt-4o)",
+    parser.add_argument("--setup", default="A) default (rating first, temperature=0, gpt-4o)",
                         help="name of the setup in setups.json")
     args = parser.parse_args()
 
