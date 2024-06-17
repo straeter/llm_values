@@ -41,17 +41,13 @@ def init_app():
         st.session_state.discrepancies = {}
         st.session_state.plot = None
 
-        # st.session_state.setups = load_json_file("setups.json")
-        # st.session_state.setup_selected = [value for key, value in st.session_state.setups.items()
-        #                                    if key.startswith("default")][0]
-
         with Session(engine) as session:
             st.session_state.setups = session.query(Setup).all()
             st.session_state.setup_selected = None
             st.session_state.topics = {tpc.name: tpc for tpc in session.query(Topic).all()}
             st.session_state.topic_selected = None
 
-        st.session_state.languages = load_json_file("languages.json")
+        st.session_state.languages = sorted(load_json_file("languages.json"))
 
 
 def main():
@@ -78,22 +74,26 @@ def main():
         tobic_object = st.session_state.topic_object
         st.markdown(tobic_object.description)
 
+        setup_list = sorted([stp.name for stp in st.session_state.setups
+                             if tobic_object.id == stp.topic_id])
+        setup_selected = st.selectbox("Choose a setup:", setup_list, index=0, key="setup")
+        setup = [stp for stp in st.session_state.setups
+                 if stp.name == setup_selected and tobic_object.id == stp.topic_id][0]
+
         question_name = st.selectbox(
             "Choose a question:",
             options=st.session_state.question_names,
             index=0,
             key="question_name",
-            # format_func=lambda x: x + " - " + f"{get_discrepancy(st.session_state.questions.get(x)):.2f}",
+            format_func=lambda x: x + " - " + f"d={setup.stats['discrepancies'].get(str(st.session_state.questions.get(x).number)):.2f}",
         )
+        
+
         question = st.session_state.questions.get(question_name) or {}
 
-        setup_list = sorted([stp.name for stp in st.session_state.setups
-                             if tobic_object.id == stp.topic_id])
-        setup_selected = st.selectbox("Choose a setup:", setup_list, index=0, key="setup")
+        language = st.selectbox("Choose language", languages, index=0, key="language")
 
-        language = st.selectbox("Choose language", languages, index=1, key="language")
 
-    setup = [stp for stp in st.session_state.setups if stp.name == setup_selected and tobic_object.id == stp.topic_id][0]
 
     if st.session_state.question_selected != question or setup_selected != st.session_state.setup_selected:
 
@@ -127,24 +127,23 @@ def main():
             if plot:
                 st.image(plot)
 
-                discrepancy = setup.stats["discrepancies"].get(str(question.number))
-                st.markdown(f"<div style='color: {discrepancy_color(discrepancy)}'>discrepancy d_q = {discrepancy:.3f}</div>", unsafe_allow_html=True)
-                refusal_rate = setup.stats["refusal_rates"].get(str(question.number))
-                st.markdown(f"<div style='color: {discrepancy_color(refusal_rate*20)}'>refusal rate r_q = {refusal_rate:.3f}</div>", unsafe_allow_html=True)
-                failure_rate = setup.stats["refusal_rates"].get(str(question.number))
-                st.markdown(f"<div style='color: {discrepancy_color(refusal_rate*20)}'>refusal rate r_q = {refusal_rate:.3f}</div>", unsafe_allow_html=True)
-
         with col_right:
             st.header("Prompt (English)", help="The LLM prompt (prefix + format + question) translated to English.")
             questions_tabs = st.tabs(["Question", "Prefix", "Format"])
             with questions_tabs[0]:
-                st.markdown(question.question, help="The actual question / statement for the LLM to evaluate.")
+                st.markdown(
+                    question.question, help="The actual question / statement for the LLM to evaluate."
+                )
             with questions_tabs[1]:
-                st.markdown(answers[0].prefixes["English"],
-                            help="The prefix to explain the LLM what this survey is about. Part of the system message.")
+                st.markdown(
+                    answers[0].prefixes["English"],
+                    help="The prefix to explain the LLM what this survey is about. Part of the system message."
+                )
             with questions_tabs[2]:
-                st.markdown(answers[0].formats["English"],
-                            help="The format how the LLM should answer. Part of the system message.")
+                st.markdown(
+                    answers[0].formats["English"],
+                    help="The format how the LLM should answer. Part of the system message."
+                )
 
             st.header("Settings", help="The settings used for the LLM call.")
             parameter = f"""
@@ -156,14 +155,6 @@ def main():
             """
             st.code(parameter, language="python", line_numbers=False)
 
-            st.header("Dataset Metrics", help="Metrics calculated for this dataset and setup (see blog post).")
-            stats = f"""
-            dataset discrepancy d_s = {setup.stats.get("dataset_discrepancy"):.3f}
-            cleaned dataset discrepancy d_c =  {setup.stats.get("cleaned_dataset_discrepancy"):.3f}
-            refusal rate r_s =  {setup.stats.get("cleaned_dataset_discrepancy"):.3f}
-            failure rate f_s =  {setup.stats.get("failure_rate"):.3f}
-            """
-            st.code(stats, language="python", line_numbers=False)
 
         translation = "English" if setup.question_english else language
 
@@ -224,6 +215,70 @@ def main():
                         if answers[tab_idx].translations:
                             st.write(answers[tab_idx].translations.get(language))
 
+
+        col_metrics_left, col_metrics_right = st.columns([1,1])
+        with col_metrics_left:
+            st.header("Question Metrics",
+                      help="Metrics calculated for this specific question and its answers for this setup (see blog post).")
+
+            col_l, col_r = st.columns([1, 1])
+            with col_l:
+                discrepancy = setup.stats["discrepancies"].get(str(question.number))
+                st.markdown(
+                    f"<div style='color: {discrepancy_color(discrepancy)}'>discrepancy d_q = {discrepancy:.3f}</div>",
+                    unsafe_allow_html=True,
+                    help="Standard deviation of ratings across languages."
+                )
+                cleaned_discrepancy = setup.stats["cleaned_discrepancies"].get(str(question.number))
+                st.markdown(
+                    f"<div style='color: {discrepancy_color(cleaned_discrepancy)}'>cleaned discrepancy d_qc = {cleaned_discrepancy:.3f}</div>",
+                    unsafe_allow_html=True,
+                    help="Standard deviation of ratings across languages without neutral (=5) ratings."
+                )
+            with col_r:
+                refusal_rate = setup.stats["refusal_rates"].get(str(question.number))
+                st.markdown(
+                    f"<div style='color: {discrepancy_color(refusal_rate * 20)}'>refusal rate r_q = {100 * refusal_rate:.1f}%</div>",
+                    unsafe_allow_html=True,
+                    help="Ratio of refused answers (rating = 5)."
+                )
+                failure_rate = setup.stats["failure_rates"].get(str(question.number))
+                st.markdown(
+                    f"<div style='color: {discrepancy_color(failure_rate * 20)}'>failure rate f_q = {100 * failure_rate:.1f}%</div>",
+                    unsafe_allow_html=True,
+                    help="Ratio of failed answers (no rating could be retrieved)."
+                )
+
+        with col_metrics_right:
+            st.header("Dataset Metrics", help="Metrics calculated for this dataset and setup (see blog post).")
+
+            col_ll, col_rr = st.columns([1, 1])
+            with col_ll:
+                ds_discrepancy = setup.stats.get("dataset_discrepancy")
+                st.markdown(
+                    f"<div style='color: {discrepancy_color(ds_discrepancy)}'>d_s = {ds_discrepancy:.3f}</div>",
+                    unsafe_allow_html=True,
+                    help="dataset discrepancy: standard deviation of ratings across languages, averaged over all questions."
+                )
+                ds_cleaned_discrepancy = setup.stats.get("cleaned_dataset_discrepancy")
+                st.markdown(
+                    f"<div style='color: {discrepancy_color(ds_cleaned_discrepancy)}'>d_c = {ds_cleaned_discrepancy:.3f}</div>",
+                    unsafe_allow_html=True,
+                    help="cleaned dataset discrepancy: dataset discrepancy without neutral (=5) ratings."
+                )
+            with col_rr:
+                ds_refusal_rate = setup.stats.get("refusal_rate")
+                st.markdown(
+                    f"<div style='color: {discrepancy_color(ds_refusal_rate * 20)}'>r_q = {100 * ds_refusal_rate:.1f}%</div>",
+                    unsafe_allow_html=True,
+                    help="dataset refusal rate: Ratio of refused answers (rating = 5) over all questions."
+                )
+                ds_failure_rate = setup.stats.get("failure_rate")
+                st.markdown(
+                    f"<div style='color: {discrepancy_color(ds_failure_rate * 20)}'>f_q = {100 * ds_failure_rate:.1f}%</div>",
+                    unsafe_allow_html=True,
+                    help="Ratio of failed answers (no rating could be retrieved) over all questiosn."
+                )
     else:
         st.title("No data found for these settings")
 

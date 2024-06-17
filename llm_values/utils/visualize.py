@@ -13,7 +13,7 @@ memory = Memory(cache_dir, verbose=0)
 
 def fig_to_pil(fig, dpi=600):
     buf = BytesIO()
-    fig.savefig(buf, format='png', dpi=dpi, bbox_inches='tight', pad_inches=0.5)
+    fig.savefig(buf, format='png', dpi=dpi, bbox_inches='tight', pad_inches=0.0)
     buf.seek(0)
     img = Image.open(buf)
     return img
