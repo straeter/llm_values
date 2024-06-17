@@ -1,7 +1,7 @@
 import streamlit as st
 from sqlalchemy.orm import Session
 
-from llm_values.models import engine, Topic, Answer, Setup
+from llm_values.models import engine, Topic, Answer, Setup, Question
 from llm_values.utils.utils import load_json_file
 from llm_values.utils.visualize import get_plot_cached
 
@@ -56,7 +56,7 @@ def main():
     with st.sidebar:
 
         st.markdown(
-            "<div style='font-weight: 600'>Explore how, dependent on the prompt language, different LLMs evaluate ethical statements, controversial claims and priorities. Code is on <a href='https://github.com/straeter/llm_values' target='_blank'>Github</a></div>",
+            "<div style='font-weight: 600'>Explore how, dependent on the prompt language, different LLMs evaluate ethical statements, controversial claims and priorities. Code is on <a href='https://github.com/straeter/llm_values' target='_blank'>Github</a>. Read more about the project in this <a href='https://christoph-straeter.com/blog/llm-values-language-dependencies-of-llms-values-ethics-and-beliefs.html' target='_blank'>blog article</a></div>",
             unsafe_allow_html=True
         )
 
@@ -68,8 +68,9 @@ def main():
             st.session_state.topic_selected = topic
             with Session(engine) as session:
                 tobic_object = session.query(Topic).filter(Topic.name == topic).first()
-                st.session_state.questions = {q.name: q for q in tobic_object.questions}
-                st.session_state.question_names = [q.name for q in tobic_object.questions]
+                topic_questions = session.query(Question).filter(Question.topic_id == tobic_object.id).order_by(Question.number).all()
+                st.session_state.questions = {q.name: q for q in topic_questions}
+                st.session_state.question_names = [q.name for q in topic_questions]
                 st.session_state.topic_object = tobic_object
         tobic_object = st.session_state.topic_object
         st.markdown(tobic_object.description)
@@ -85,7 +86,7 @@ def main():
             options=st.session_state.question_names,
             index=0,
             key="question_name",
-            format_func=lambda x: x + " - " + f"d={setup.stats['discrepancies'].get(str(st.session_state.questions.get(x).number)):.2f}",
+            format_func=lambda x: x + " - " + f"{setup.stats['discrepancies'].get(str(st.session_state.questions.get(x).number)):.2f}",
         )
         
 
