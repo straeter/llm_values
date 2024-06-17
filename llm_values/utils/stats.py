@@ -12,6 +12,26 @@ def extract_rating(s):
         return None  # Return None if no matching pattern is found
 
 
+def get_language_means(answers):
+    question_means = {}
+    languages = answers[0].answers
+    for language in languages:
+        ratings = [answer.ratings[language] for answer in answers]
+        ratings = [r for r in ratings if r is not None]
+        question_means[language] = np.mean(ratings) if ratings else None
+    return question_means
+
+
+def get_language_std(answers):
+    question_means = {}
+    languages = answers[0].answers
+    for language in languages:
+        ratings = [answer.ratings[language] for answer in answers]
+        ratings = [r for r in ratings if r is not None]
+        question_means[language] = np.std(ratings) if ratings else None
+    return question_means
+
+
 def get_discrepancy(answer):
     """Get the discrepancy (standard deviation of ratings across languages) for a single answer
 
@@ -23,7 +43,7 @@ def get_discrepancy(answer):
     return float(ratings.std())
 
 
-def get_all_discrepancies(answers):
+def get_question_discrepancy(answers):
     """Get the discrepancy (standard deviation of ratings across languages) for aggregated answers (same question+settings asked several times)
 
     :param answers: Answer objects
@@ -38,7 +58,7 @@ def get_all_discrepancies(answers):
     return np.array(means).std() if means else None
 
 
-def get_cleaned_discrepancies(answers):
+def get_cleaned_question_discrepancy(answers):
     """Get the discrepancy (standard deviation of ratings across languages) for aggregated answers (same question+settings asked several times)
 
     :param answers: Answer objects
@@ -51,6 +71,16 @@ def get_cleaned_discrepancies(answers):
         if ratings:
             means.append(np.mean(ratings))
     return np.array(means).std() if means else None
+
+
+def get_question_assertiveness(answers):
+    means = []
+    for language in answers[0].answers:
+        ratings = [answer.ratings[language] for answer in answers]
+        ratings = [r for r in ratings if r is not None]
+        if ratings:
+            means.append(np.mean(ratings))
+    return np.sqrt(((np.array(means) - 5.) ** 2).mean()) if means else None
 
 
 def get_refusal_rates(answers):
@@ -81,6 +111,16 @@ def get_average(all_refusal_ratios: dict):
     average_refusal_ratio = np.array(average_refusal_list).mean()
     return average_refusal_ratio
 
+def get_failure_rates(answers):
+    all_rating_count = 0
+    all_failure_count = 0
+    languages = answers[0].answers
+    for language in languages:
+        ratings = [answer.ratings[language] for answer in answers]
+        all_rating_count += len(ratings)
+        all_failure_count += ratings.count(None)
+
+    return all_failure_count / all_rating_count
 
 def get_language_refusal_rate(answers):
     language_refusals = {}
@@ -92,6 +132,7 @@ def get_language_refusal_rate(answers):
             language_refusals[language] = ratings.count(5) / len(ratings)
 
     return language_refusals
+
 
 def get_language_failure_rate(answers):
     language_failure_rates = {}
@@ -105,36 +146,25 @@ def get_language_failure_rate(answers):
     return language_failure_rates
 
 
-def get_cleaned_language_std(answers):
-    language_stds = {}
-    languages = answers[0].answers
-    for language in languages:
-        ratings = [answer.ratings[language] for answer in answers]
-        ratings = [r for r in ratings if (r is not None and int(r) != 5)]
-        if ratings:
-            language_stds[language] = np.sqrt(((np.array(ratings)-5.)**2).mean())
-    return language_stds
-
-
-def get_language_std(answers):
+def get_language_assertiveness(answers):
     language_stds = {}
     languages = answers[0].answers
     for language in languages:
         ratings = [answer.ratings[language] for answer in answers]
         ratings = [r for r in ratings if r is not None]
         if ratings:
-            language_stds[language] = np.sqrt(((np.array(ratings)-5.)**2).mean())
+            language_stds[language] = np.sqrt(((np.array(ratings) - 5.) ** 2).mean())
     return language_stds
 
 
-def get_failure_rates(answers):
-    all_rating_count = 0
-    all_failure_count = 0
+def get_cleaned_language_assertiveness(answers):
+    language_stds = {}
     languages = answers[0].answers
     for language in languages:
         ratings = [answer.ratings[language] for answer in answers]
-        all_rating_count += len(ratings)
-        all_failure_count += ratings.count(None)
+        ratings = [r for r in ratings if (r is not None and int(r) != 5)]
+        if ratings:
+            language_stds[language] = np.sqrt(((np.array(ratings) - 5.) ** 2).mean())
+    return language_stds
 
-    return all_failure_count / all_rating_count
 

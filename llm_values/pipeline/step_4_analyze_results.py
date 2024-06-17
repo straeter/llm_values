@@ -5,9 +5,10 @@ from sqlalchemy.orm import Session
 from sqlalchemy.orm.attributes import flag_modified
 
 from llm_values.models import engine, Topic, Answer, Setup
-from llm_values.utils.stats import get_all_discrepancies, get_cleaned_discrepancies, \
-    get_average, get_language_failure_rate, get_language_refusal_rate, get_language_std, \
-    get_cleaned_language_std, get_refusal_rates, get_failure_rates
+from llm_values.utils.stats import get_question_discrepancy, get_cleaned_question_discrepancy, \
+    get_average, get_language_failure_rate, get_language_refusal_rate, get_language_assertiveness, \
+    get_cleaned_language_assertiveness, get_refusal_rates, get_failure_rates, get_question_assertiveness, \
+    get_language_means, get_language_std
 from llm_values.utils.utils import load_json_file
 
 
@@ -43,33 +44,42 @@ async def calc_stats(topic_object, params: dict):
         results = session.query(Answer).filter_by(**params).all()
 
         try:
-            all_discrepancies = {}
-            all_cleaned_discrepancies = {}
-            all_refusal_rates = {}
-            all_failure_rates={}
+            question_discrepancies = {}
+            question_cleaned_discrepancies = {}
+            question_assertivenesses = {}
+            question_refusal_rates = {}
+            question_failure_rates = {}
+            question_language_means = {}
+            question_language_std = {}
             for question in questions:
                 aggregated_answers = [answer for answer in results if answer.question_id == question.id]
-                all_discrepancies[question.number] = get_all_discrepancies(aggregated_answers)
-                all_cleaned_discrepancies[question.number] = get_cleaned_discrepancies(aggregated_answers)
-                all_refusal_rates[question.number] = get_refusal_rates(aggregated_answers)
-                all_failure_rates[question.number] = get_failure_rates(aggregated_answers)
+                question_language_means[question.number] = get_language_means(aggregated_answers)
+                question_language_std[question.number] = get_language_std(aggregated_answers)
+                question_discrepancies[question.number] = get_question_discrepancy(aggregated_answers)
+                question_cleaned_discrepancies[question.number] = get_cleaned_question_discrepancy(aggregated_answers)
+                question_assertivenesses[question.number] = get_question_assertiveness(aggregated_answers)
+                question_refusal_rates[question.number] = get_refusal_rates(aggregated_answers)
+                question_failure_rates[question.number] = get_failure_rates(aggregated_answers)
 
-            all_stats["discrepancies"] = all_discrepancies
-            all_stats["cleaned_discrepancies"] = all_cleaned_discrepancies
-            all_stats["refusal_rates"] = all_refusal_rates
-            all_stats["failure_rates"] = all_failure_rates
+            all_stats["discrepancies"] = question_discrepancies
+            all_stats["cleaned_discrepancies"] = question_cleaned_discrepancies
+            all_stats["assertivenesses"] = question_assertivenesses
+            all_stats["refusal_rates"] = question_refusal_rates
+            all_stats["failure_rates"] = question_failure_rates
 
-            all_stats["dataset_discrepancy"] = get_average(all_discrepancies)
-            all_stats["cleaned_dataset_discrepancy"] = get_average(
-                all_cleaned_discrepancies)
-            all_stats["refusal_rate"] = get_average(all_refusal_rates)
+            all_stats["dataset_discrepancy"] = get_average(question_discrepancies)
+            all_stats["cleaned_dataset_discrepancy"] = get_average(question_cleaned_discrepancies)
+            all_stats["dataset_assertiveness"] = get_average(question_assertivenesses)
+            all_stats["refusal_rate"] = get_average(question_refusal_rates)
+            all_stats["failure_rate"] = get_average(question_failure_rates)
 
+            all_stats["language_means"] = question_language_means
+            all_stats["language_std"] = question_language_std
             all_stats["language_refusal_rate"] = get_language_refusal_rate(results)
             all_stats["language_failure_rate"] = get_language_failure_rate(results)
-            all_stats["language_std"] = get_language_std(results)
-            all_stats["cleaned_language_std"] = get_cleaned_language_std(results)
+            all_stats["language_assertiveness"] = get_language_assertiveness(results)
+            all_stats["cleaned_language_assertiveness"] = get_cleaned_language_assertiveness(results)
 
-            all_stats["failure_rate"] = get_average(all_failure_rates)
         except Exception as e:
             print(e)
     return all_stats

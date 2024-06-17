@@ -82,19 +82,22 @@ def main():
                  if stp.name == setup_selected and tobic_object.id == stp.topic_id][0]
 
         question_name = st.selectbox(
-            "Choose a question:",
+            "Choose a question: (title - discrepancy)",
             options=st.session_state.question_names,
             index=0,
             key="question_name",
             format_func=lambda x: x + " - " + f"{setup.stats['discrepancies'].get(str(st.session_state.questions.get(x).number)):.2f}",
         )
-        
 
         question = st.session_state.questions.get(question_name) or {}
 
-        language = st.selectbox("Choose language", languages, index=0, key="language")
-
-
+        language = st.selectbox(
+            "Choose language: (language - mean rating)",
+            languages,
+            index=0,
+            key="language",
+            format_func=lambda x: x + " - " + f"{setup.stats['language_means'].get(str(question.number)).get(x):.2f}" if isinstance(setup.stats['language_means'].get(str(question.number)).get(x), float) else f"{x} - N/A"
+        )
 
     if st.session_state.question_selected != question or setup_selected != st.session_state.setup_selected:
 
@@ -236,6 +239,12 @@ def main():
                     unsafe_allow_html=True,
                     help="Standard deviation of ratings across languages without neutral (=5) ratings."
                 )
+                assertiveness = setup.stats["assertivenesses"].get(str(question.number))
+                st.markdown(
+                    f"<div style='color: {discrepancy_color(0.5*assertiveness)}'>assertiveness a_q = {assertiveness:.3f}</div>",
+                    unsafe_allow_html=True,
+                    help="Standard deviation of ratings around neutral answer (=5)."
+                )
             with col_r:
                 refusal_rate = setup.stats["refusal_rates"].get(str(question.number))
                 st.markdown(
@@ -266,6 +275,12 @@ def main():
                     f"<div style='color: {discrepancy_color(ds_cleaned_discrepancy)}'>d_c = {ds_cleaned_discrepancy:.3f}</div>",
                     unsafe_allow_html=True,
                     help="cleaned dataset discrepancy: dataset discrepancy without neutral (=5) ratings."
+                )
+                ds_assertiveness = setup.stats.get("dataset_assertiveness")
+                st.markdown(
+                    f"<div style='color: {discrepancy_color(0.5*ds_assertiveness)}'>a_s = {ds_assertiveness:.3f}</div>",
+                    unsafe_allow_html=True,
+                    help="dataset assertiveness: Standard deviation of ratings around the neutral answer (=5), averaged over all questions."
                 )
             with col_rr:
                 ds_refusal_rate = setup.stats.get("refusal_rate")
