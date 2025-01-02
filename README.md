@@ -15,6 +15,8 @@ The results of our work are visualized under https://llm-values.streamlit.app/.
 
 The visualization app (a streamlit app) is also part of this rep (`app.py`).
 
+<img src="./static/preview.png" width="512"/><br/>
+
 ## Getting started
 To install the repo (to generate data and/or run the streamlit app):
 
