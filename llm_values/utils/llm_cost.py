@@ -3,6 +3,18 @@ import tiktoken
 encoding = tiktoken.get_encoding("cl100k_base")
 
 llm_prices = {
+    "o1-2024-12-17": {
+        "input": 0.15 / 1000,
+        "output": 0.6 / 1000,
+    },
+    "gpt-4o-mini-2024-07-18": {
+        "input": 15 / 1000,
+        "output": 60 / 1000,
+    },
+    "gpt-4o-2024-11-20": {
+        "input": 2.5 / 1000,
+        "output": 10 / 1000,
+    },
     "gpt-4o-2024-05-13": {
         "input": 5 / 1000,
         "output": 15 / 1000,
