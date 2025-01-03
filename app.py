@@ -53,14 +53,18 @@ def init_app():
 def main():
     languages = st.session_state.languages
 
-    with st.sidebar:
+    topics = sorted(list(st.session_state.topics.keys()))
+    if not topics:
+        st.warning("No topics found. You have to generate data first or connect to a database that contains"
+                   "pre-generated data!")
+        st.stop()
 
+    with st.sidebar:
         st.markdown(
             "<div style='font-weight: 600'>Explore how, dependent on the prompt language, different LLMs evaluate ethical statements, controversial claims and priorities. Code is on <a href='https://github.com/straeter/llm_values' target='_blank'>Github</a>. Read more about the project in this <a href='https://christoph-straeter.com/blog/llm-values-language-dependencies-of-llms-values-ethics-and-beliefs.html' target='_blank'>blog article</a></div>",
             unsafe_allow_html=True
         )
 
-        topics = sorted(list(st.session_state.topics.keys()))
         topic = st.selectbox("Choose a dataset:", topics, index=0, key="topic")
 
         if topic != st.session_state.topic_selected:
@@ -68,7 +72,8 @@ def main():
             st.session_state.topic_selected = topic
             with Session(engine) as session:
                 tobic_object = session.query(Topic).filter(Topic.name == topic).first()
-                topic_questions = session.query(Question).filter(Question.topic_id == tobic_object.id).order_by(Question.number).all()
+                topic_questions = session.query(Question).filter(Question.topic_id == tobic_object.id).order_by(
+                    Question.number).all()
                 st.session_state.questions = {q.name: q for q in topic_questions}
                 st.session_state.question_names = [q.name for q in topic_questions]
                 st.session_state.topic_object = tobic_object
@@ -86,7 +91,8 @@ def main():
             options=st.session_state.question_names,
             index=0,
             key="question_name",
-            format_func=lambda x: x + " - " + f"{setup.stats['discrepancies'].get(str(st.session_state.questions.get(x).number)):.2f}",
+            format_func=lambda
+                x: x + " - " + f"{setup.stats['discrepancies'].get(str(st.session_state.questions.get(x).number)):.2f}",
         )
 
         question = st.session_state.questions.get(question_name) or {}
@@ -96,7 +102,9 @@ def main():
             languages,
             index=0,
             key="language",
-            format_func=lambda x: x + " - " + f"{setup.stats['language_means'].get(str(question.number)).get(x):.2f}" if isinstance(setup.stats['language_means'].get(str(question.number)).get(x), float) else f"{x} - N/A"
+            format_func=lambda
+                x: x + " - " + f"{setup.stats['language_means'].get(str(question.number)).get(x):.2f}" if isinstance(
+                setup.stats['language_means'].get(str(question.number)).get(x), float) else f"{x} - N/A"
         )
 
     if st.session_state.question_selected != question or setup_selected != st.session_state.setup_selected:
@@ -151,14 +159,13 @@ def main():
 
             st.header("Settings", help="The settings used for the LLM call.")
             parameter = f"""
-            model = "{setup.model}"
-            temperature = {setup.temperature}
-            question_english = {setup.question_english}
-            answer_english = {setup.answer_english}
-            rating_last = {setup.rating_last}
-            """
+                model = "{setup.model}"
+                temperature = {setup.temperature}
+                question_english = {setup.question_english}
+                answer_english = {setup.answer_english}
+                rating_last = {setup.rating_last}
+                """
             st.code(parameter, language="python", line_numbers=False)
-
 
         translation = "English" if setup.question_english else language
 
@@ -219,8 +226,7 @@ def main():
                         if answers[tab_idx].translations:
                             st.write(answers[tab_idx].translations.get(language))
 
-
-        col_metrics_left, col_metrics_right = st.columns([1,1])
+        col_metrics_left, col_metrics_right = st.columns([1, 1])
         with col_metrics_left:
             st.header("Question Metrics",
                       help="Metrics calculated for this specific question and its answers for this setup (see blog post).")
@@ -241,7 +247,7 @@ def main():
                 )
                 assertiveness = setup.stats["assertivenesses"].get(str(question.number))
                 st.markdown(
-                    f"<div style='color: {discrepancy_color(0.5*assertiveness)}'>assertiveness a_q = {assertiveness:.3f}</div>",
+                    f"<div style='color: {discrepancy_color(0.5 * assertiveness)}'>assertiveness a_q = {assertiveness:.3f}</div>",
                     unsafe_allow_html=True,
                     help="Standard deviation of ratings around neutral answer (=5)."
                 )
@@ -278,7 +284,7 @@ def main():
                 )
                 ds_assertiveness = setup.stats.get("dataset_assertiveness")
                 st.markdown(
-                    f"<div style='color: {discrepancy_color(0.5*ds_assertiveness)}'>a_s = {ds_assertiveness:.3f}</div>",
+                    f"<div style='color: {discrepancy_color(0.5 * ds_assertiveness)}'>a_s = {ds_assertiveness:.3f}</div>",
                     unsafe_allow_html=True,
                     help="dataset assertiveness: Standard deviation of ratings around the neutral answer (=5), averaged over all questions."
                 )
