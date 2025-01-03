@@ -92,7 +92,11 @@ class GPT:
                 if model == "gpt-4":
                     actual_model = "gpt-4-0125-preview"
                 elif model == "gpt-4o":
-                    actual_model = "gpt-4o-2024-05-13"
+                    actual_model = "gpt-4o-2024-11-20"
+                elif model == "gpt-4o-mini":
+                    actual_model = "gpt-4o-mini-2024-07-18"
+                elif model == "o1":
+                    actual_model = "o1-2024-12-17"
                 elif model == "gpt-3.5":
                     actual_model = "gpt-3.5-turbo-0125"
                 else:
